@@ -30,9 +30,9 @@ The system is divided into clearly defined layers: **User Side**, **Fitness Trac
 The BEneFIT process is broken down into intuitive phases, each supported by protocol logic and community validation. The workflow ensures that every goal, data point, and payout is fair, auditable, and decentralized.
 
 **Figure 2: User Workflow**
-
+<div align="center">
 ![BEneFIT User Workflow](./Images/workflow.png)
-
+</div>
 ### 2.1 Group Approval
 
 - User sets a personal fitness goal and stakes ETH using their Web3 wallet.
