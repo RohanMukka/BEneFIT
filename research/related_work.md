@@ -1,85 +1,77 @@
 # Related Work
 
-## 1. Introduction to Move-to-Earn (M2E) Apps
+## 1. Why Move-to-Earn Is a Big Deal
 
-Move-to-Earn (M2E) applications have emerged as a novel intersection of fitness technology, behavioral psychology, and (in some cases) decentralized finance. Unlike traditional fitness trackers, M2E platforms reward users for physical activity with tokens, in-app credits, or even cryptocurrency, thus transforming exercise from a purely intrinsic or health-motivated activity into a potentially lucrative pursuit.
+Getting people to move more is a problem that never seems to go away, no matter how many step counters or fitness apps we install. For a lot of us, those little badges or calorie charts just aren’t enough to keep us going for more than a week or two. This is why Move-to-Earn (M2E) apps have become such an interesting trend in the last few years. The core idea is simple: if you give people something real—money, tokens, or even just the chance to win prizes—they’re much more likely to stick with a new habit.
 
-**Motivation for M2E:**  
-The M2E approach is grounded in behavioral science principles such as reward shaping, loss aversion, and peer accountability. Research consistently shows that extrinsic incentives, when properly designed, can boost engagement in health-promoting behaviors—especially among otherwise inactive or unmotivated users.
+The M2E space brings together several different worlds: traditional health apps, psychology (how people are motivated), and in some cases, even cryptocurrency and blockchain technology. As smartphones have gotten better and wearables more common, it’s easier than ever to track what people are doing—and just as easy to reward them for it.
 
----
+## 2. What Are Other People Doing? (Major Apps & Approaches)
 
-## 2. Review of Existing Platforms
+### Sweatcoin
 
-### 2.1 Sweatcoin
+Sweatcoin is often the first M2E app that comes up in conversation. Its pitch is straightforward: you walk, your phone tracks your steps, and you get rewarded with Sweatcoins. You can then use these in the app’s own “store” for products, discounts, or sometimes donations. The way it verifies your activity is mostly through your phone’s step counter and GPS, making sure you’re actually outside and moving—not just shaking your phone at home.
 
-**Sweatcoin** is one of the earliest and most popular M2E apps. It converts a user’s verified steps into “Sweatcoins,” which can be redeemed for in-app rewards such as discounts, merchandise, or charitable donations.  
-- **Data Verification:** Sweatcoin employs GPS data alongside accelerometer readings to check that steps are genuine and correspond to actual distance covered outdoors.  
-- **Limitations:** Rewards have no real-world cash value and cannot be traded or withdrawn, and the system is closed-source with centralized management.
-- **Effectiveness:** According to Elliott et al. (2019) [2], Sweatcoin’s modest incentives can motivate significant behavioral change, especially in users with lower baseline activity levels.
+The rewards aren’t cash—you can’t exchange Sweatcoins for real money or transfer them outside the platform. Some people love the idea, but others find that the value of the rewards fades pretty quickly, especially if there aren’t offers that appeal to them. The app tries to stop cheating by matching GPS data with steps, but as with any tech, determined cheaters can still sometimes find loopholes.
 
-### 2.2 StepN
+Interestingly, a 2019 study by Elliott and colleagues [2] looked at how people used Sweatcoin and found that the app really did encourage users, especially the least active ones, to move more. Even non-cash rewards had a positive effect, showing that just a bit of incentive can help nudge people in the right direction.
 
-**StepN** builds on the M2E model by integrating blockchain, NFTs, and cryptocurrencies. Users must purchase NFT “sneakers” to participate, after which they can earn crypto tokens (GST, GMT) by walking or running.
-- **Marketplace Economy:** Tokens and NFTs have real-world value and can be traded on crypto exchanges, providing direct financial incentives.
-- **Barriers and Risks:** The NFT requirement creates a financial barrier to entry and exposes users to market volatility and token inflation.  
-- **Fraud Detection:** Like Sweatcoin, StepN attempts to validate activity through GPS and device sensors, but remains vulnerable to spoofing and automation attacks.
+### StepN
 
-### 2.3 Other M2E Efforts
+StepN is kind of the next generation of M2E, especially for people who are into crypto. The biggest difference is that StepN users have to buy a special NFT sneaker to get started, which means there’s an upfront cost before you can earn anything. After that, every step you take (validated by GPS and sensors) can earn you tokens (GST, GMT), and these tokens can actually be sold or traded for real money on crypto exchanges. There’s even a marketplace for digital sneaker NFTs and items that boost your earning potential.
 
-Other notable platforms include **GymPact**, which uses escrowed payments and third-party verification, and **Charity Miles**, which donates earned rewards to charity. All share similar themes of activity tracking, reward, and validation but differ in ecosystem openness, incentive structure, and technical design.
+But StepN isn’t perfect either. The NFT requirement creates a paywall, so people who are just curious or want to try before they buy may never get started. There’s also the risk that token values can crash, and if the platform doesn’t manage its economy well, the rewards could dry up or become worthless. Like Sweatcoin, StepN works hard to keep things fair, but some users still try to cheat the system with step-simulating devices or by spoofing their location.
 
----
+### Other M2E Efforts
 
-## 3. Fraud, Data Integrity, and Validation Challenges
+Other M2E platforms exist, each trying their own spin on the basic formula. GymPact lets people “bet” on their workouts and lose money if they skip. Charity Miles gives people the chance to turn activity into donations. The common thread is the use of real incentives (money, charity, or tokens) to try to drive behavior change, but the details of how data is validated, how rewards are managed, and how new users are brought in can differ quite a bit.
 
-A persistent challenge in M2E apps is **preventing users from faking physical activity**. Both Sweatcoin and StepN are susceptible to:
-- **Auto-walking devices:** Mechanical or electronic devices that shake or move the phone to simulate steps
-- **GPS spoofing:** Manipulating device location to simulate outdoor movement
-- **Step injection or app modification:** Tampering with the app or device to generate false data
+## 3. Fraud, Data Integrity, and the Real-World Mess
 
-**Research Response:**  
-Lee et al. (2025) [1] conducted an in-depth study of M2E fraud, highlighting that auto-walking devices can generate tens of thousands of fake steps daily. To address this, they designed a detection system using **Convolutional Neural Networks (CNNs)** trained on smartphone sensor data (accelerometer, gyroscope). Their approach achieved nearly perfect accuracy (F1-score of 0.997) in distinguishing between genuine walking and simulated movement—demonstrating that machine learning can substantially improve the integrity of M2E rewards.
+One issue that keeps coming up—both in the news and in the research—is how easy it is for people to cheat. It turns out that if you put money or valuable tokens on the line, some users will get creative. From putting their phone on a paint mixer to using spring-loaded contraptions called “auto-walkers,” people have tried all sorts of tricks to rack up fake steps.
 
----
+A study by Lee et al. [1] tackled this problem head-on. They showed that even advanced apps can be fooled by these devices. Their solution was to use deep learning—specifically, convolutional neural networks (CNNs)—to analyze not just steps, but the actual movement patterns from a phone’s accelerometer and gyroscope. Their model could tell the difference between genuine walking and artificial movement with near-perfect accuracy. This shows that tech can fight back against cheating, but it’s a cat-and-mouse game and not all apps have the resources or know-how to implement such advanced checks.
 
-## 4. Incentive Design and Behavioral Science
+## 4. Does Money Really Motivate People? (Behavioral Insights)
 
-The effectiveness of M2E platforms is not solely a function of their technical design but also the **structure of their incentives and social features**.
+Besides the tech, it’s also worth asking: does this kind of reward system actually change behavior? According to the evidence, yes—but the details matter.
 
-- **Soft vs. Hard Commitments:**  
-  Spika et al. (2024) [3] conducted a field experiment on gym attendance, comparing “soft” (no penalty) vs. “hard” (self-funded, loss-penalty) commitment contracts. They found that hard contracts—where users risked their own money—led to a **21% increase in gym visits** compared to 8% for soft commitments.  
-  This suggests that real financial stakes significantly boost adherence to fitness goals, particularly when the loss is tangible and immediate.
+Spika et al. [3] ran an interesting experiment with gym-goers in Sweden. They compared two groups: one signed up for “soft” commitments (where there’s no real loss if you fail), and the other for “hard” commitments (where you actually put your own money on the line). The hard commitment group went to the gym 21% more often, while the soft commitment group improved by only 8%. This fits with what we know about loss aversion in psychology—people will work harder to avoid losing something than they will to gain a small reward.
 
-- **Group Validation and Peer Support:**  
-  Many M2E systems, including BEneFIT, are exploring group-based models where participants validate each other’s progress. Research indicates that peer accountability, social recognition, and transparent validation can help maintain engagement and fairness, while also distributing trust more broadly than centralized admin models.
+Sweatcoin’s own data, as reported by Elliott et al. [2], showed that even rewards that aren’t cash can boost activity, but the effect is stronger when users see real value at stake.
 
----
+## 5. What’s Missing or Still Unsolved in Current M2E Apps?
 
-## 5. Lessons Learned and Gaps Identified
+From both research and user experience, there are some obvious pain points:
 
-Despite their popularity, existing M2E apps face several limitations:
+- **Centralized control:** If an app is run by a single company, users have to trust that company not to change the rules, disappear, or misuse funds. Sweatcoin and StepN are both centralized.
+- **Barriers to entry:** The NFT paywall in StepN is a turnoff for new users, while Sweatcoin’s rewards are often limited to whatever is on offer that month.
+- **Cheating:** As mentioned, the incentive to cheat grows as rewards get more valuable. Most apps can’t fully prevent it.
+- **Rigid goals:** Many apps force users to adopt generic goals (“10,000 steps/day”) instead of letting them pick targets that make sense for their lifestyle or fitness level.
+- **Reward inflexibility:** If you can’t cash out, transfer, or use your rewards the way you want, the system loses appeal over time.
 
-- **Centralization:** Most platforms (Sweatcoin, StepN) rely on closed, centralized servers, making them vulnerable to policy changes, misuse of funds, and lack of transparency.
-- **Barrier to Entry:** Requiring NFT purchase (as in StepN) limits participation and creates financial risk for users.
-- **Reward Limitations:** Non-cash, in-app-only rewards may not sufficiently motivate all users, particularly in the long term.
-- **Fraud Vulnerability:** Even with GPS and step validation, automated and spoofed activity remains a persistent threat.
-- **Lack of Customization:** Many platforms enforce rigid activity goals rather than allowing users to define meaningful, personalized objectives.
+## 6. How BEneFIT Tries to Solve These Problems
 
----
+Our project, BEneFIT, was designed with all these issues in mind. Here’s what sets it apart from the platforms above:
 
-## 6. How BEneFIT Builds on Related Work
+- **No middleman:** BEneFIT uses smart contracts on the blockchain, so all funds and rewards are managed automatically and transparently.
+- **Pick your own goal:** Users get to decide what fitness means to them, whether that’s steps, workouts, or something else.
+- **Real stakes:** Borrowing from Spika et al. [3], users have to lock up real ETH. If they don’t meet their goal, there’s a real consequence (either redistribution or funds are held), so loss aversion kicks in.
+- **Peer validation:** Instead of a faceless algorithm, progress is checked by other users in the pool, adding a social and fairness element.
+- **Privacy-friendly:** Participation can be anonymous—no need to share personal data.
+- **Fraud defense:** The plan is to use machine learning to scan sensor data and stop obvious cheats, following the example set by Lee et al. [1].
+- **Choice of reward model:** Some people like competition, others just want to prove something to themselves. BEneFIT lets users pick between a competitive (redistribution) and non-competitive (lock-and-release) approach.
 
-BEneFIT is designed to directly address these shortcomings:
+## 7. How This Connects to Our Research Questions and Grading Criteria
 
-- **Decentralization:** By using smart contracts, BEneFIT enables transparent, trustless management of user stakes and reward distribution, minimizing reliance on any central coordinator.
-- **Custom Goals:** Users set their own fitness targets (steps, duration, etc.), increasing relevance and motivation.
-- **Real Financial Stakes:** Inspired by findings from Spika et al. [3], users risk actual cryptocurrency (ETH), leveraging loss aversion to reinforce commitment.
-- **Peer Validation and Anonymity:** Progress is validated through group voting, and users participate anonymously to minimize bias and privacy concerns.
-- **Advanced Fraud Detection:** The framework proposes integrating machine-learning-based sensor analysis (as in Lee et al. [1]) to minimize manipulation.
-- **Reward Flexibility:** BEneFIT’s dual models (redistribution and lock-release) accommodate both competitive and non-competitive users.
+When our professor reviewed the project, some key challenges were raised: Is this really different from betting in a group chat? Does decentralization solve real problems? Can data be verified fairly and securely?
 
-By synthesizing best practices from existing apps, incorporating peer-reviewed findings, and addressing gaps highlighted in the literature and by critics, BEneFIT aims to offer a **fairer, more inclusive, and more transparent alternative** to current M2E solutions.
+Here’s what we found:
+- Decentralized contracts don’t just automate payments—they build trust and transparency, so users don’t have to rely on a company that might disappear or change the rules overnight.
+- Peer validation, anonymity, and fraud detection together make it much harder for cheaters to get away with it, and fairer for those who are genuine.
+- Financial incentives, when used correctly, actually help people stick to fitness goals—especially if there’s a real chance of loss.
+
+All of these design decisions are backed up by the research, but they also reflect feedback from users of existing M2E apps who want more flexibility, transparency, and fairness.
 
 ---
 
@@ -87,6 +79,4 @@ By synthesizing best practices from existing apps, incorporating peer-reviewed f
 
 1. Lee S. Real Steps or Not: Auto-Walker Detection in Move-to-Earn Applications. *Sensors* (Basel). 2025 Feb 7;25(4):1002. https://doi.org/10.3390/s25041002.  
 2. Elliott M, Eck F, Khmelev E, Derlyatka A, Fomenko O. Physical Activity Behavior Change Driven by Engagement With an Incentive-Based App: Evaluating the Impact of Sweatcoin. *JMIR Mhealth Uhealth*. 2019;7(7):e12445. https://doi.org/10.2196/12445.  
-3. Spika D, Wickström Östervall L, Gerdtham U, Wengström E. Put a bet on it: Can self-funded commitment contracts curb fitness procrastination? *J Health Econ*. 2024 Dec;98:102943. https://doi.org/10.1016/j.jhealeco.2024.102943.  
-
----
+3. Spika D, Wickström Östervall L, Gerdtham U, Wengström E. Put a bet on it: Can self-funded commitment contracts curb fitness procrastination? *J Health Econ*. 2024 Dec;98:102943. https://doi.org/10.1016/j.jhealeco.2024.102943.
