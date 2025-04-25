@@ -1,5 +1,5 @@
 # Methodology
-
+<div align="justify">
 The BEneFIT project leverages a modular, decentralized architecture and a robust, privacy-preserving workflow to deliver trustless, community-driven fitness accountability. This methodology details the architecture, workflow, and smart contract design powering the platform.
 
 ---
