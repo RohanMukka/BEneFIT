@@ -1,5 +1,5 @@
 # Related Work
-
+<div align="justify">
 ## 1. Why Move-to-Earn Is a Big Deal
 
 Getting people to move more is a problem that never seems to go away, no matter how many step counters or fitness apps we install. For a lot of us, those little badges or calorie charts just aren’t enough to keep us going for more than a week or two. This is why Move-to-Earn (M2E) apps have become such an interesting trend in the last few years. The core idea is simple: if you give people something real—money, tokens, or even just the chance to win prizes—they’re much more likely to stick with a new habit.
