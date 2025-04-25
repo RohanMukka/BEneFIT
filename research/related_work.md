@@ -26,7 +26,7 @@ But StepN isn’t perfect either. The NFT requirement creates a paywall, so peop
 
 Other M2E platforms exist, each trying their own spin on the basic formula. GymPact lets people “bet” on their workouts and lose money if they skip. Charity Miles gives people the chance to turn activity into donations. The common thread is the use of real incentives (money, charity, or tokens) to try to drive behavior change, but the details of how data is validated, how rewards are managed, and how new users are brought in can differ quite a bit.
 
-## 3. Fraud, Data Integrity, and the Real-World Mess
+## 3. Fraud, Data Integrity, and the Real-World Problems
 
 One issue that keeps coming up—both in the news and in the research—is how easy it is for people to cheat. It turns out that if you put money or valuable tokens on the line, some users will get creative. From putting their phone on a paint mixer to using spring-loaded contraptions called “auto-walkers,” people have tried all sorts of tricks to rack up fake steps.
 
@@ -62,16 +62,6 @@ Our project, BEneFIT, was designed with all these issues in mind. Here’s what 
 - **Fraud defense:** The plan is to use machine learning to scan sensor data and stop obvious cheats, following the example set by Lee et al. [1].
 - **Choice of reward model:** Some people like competition, others just want to prove something to themselves. BEneFIT lets users pick between a competitive (redistribution) and non-competitive (lock-and-release) approach.
 
-## 7. How This Connects to Our Research Questions and Grading Criteria
-
-When our professor reviewed the project, some key challenges were raised: Is this really different from betting in a group chat? Does decentralization solve real problems? Can data be verified fairly and securely?
-
-Here’s what we found:
-- Decentralized contracts don’t just automate payments—they build trust and transparency, so users don’t have to rely on a company that might disappear or change the rules overnight.
-- Peer validation, anonymity, and fraud detection together make it much harder for cheaters to get away with it, and fairer for those who are genuine.
-- Financial incentives, when used correctly, actually help people stick to fitness goals—especially if there’s a real chance of loss.
-
-All of these design decisions are backed up by the research, but they also reflect feedback from users of existing M2E apps who want more flexibility, transparency, and fairness.
 
 ---
 
