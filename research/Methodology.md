@@ -10,7 +10,11 @@ The system is divided into clearly defined layers: **User Side**, **Fitness Trac
 
 **Figure 1: System Architecture**
 
-![BEneFIT System Architecture](./Images/Architecture.png)
+<div align="center">
+
+<img src="./Images/Architecture.png" alt="BEneFIT System Architecture" width="80%">
+
+</div>
 
 - **User Side:**  
   - The **BEneFIT dApp (Frontend)** enables users to set goals, track progress, and interact with smart contracts, signing transactions via their Web3 wallet.
@@ -31,7 +35,11 @@ The BEneFIT process is broken down into intuitive phases, each supported by prot
 
 **Figure 2: User Workflow**
 
-![BEneFIT User Workflow](./Images/workflow.png)
+<div align="center">
+
+<img src="./Images/workflow.png" alt="BEneFIT User Workflow" width="60%">
+
+</div>
 
 ### 2.1 Group Approval
 
@@ -59,7 +67,11 @@ The BEneFIT smart contract (`BEneFIT.sol`) is built with a modular approach, enc
 
 **Figure 3: Smart Contract Architecture**
 
-![BEneFIT Smart Contract](./Images/smart_contract.png)
+<div align="center">
+
+<img src="./Images/smart_contract.png" alt="BEneFIT Smart Contract" width="100%">
+
+</div>
 
 ### Main Modules
 
