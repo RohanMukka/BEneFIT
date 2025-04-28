@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
+// import dotenv from "dotenv";
 import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
 
-const CONTRACT_ADDRESS = "0x399F854AAA0424CB360853cbf4a80b66c8cE2960";
+// dotenv.config();
+
+const CONTRACT_ADDRESS = "0x59EF809743b82883031FEF835f67cbb6dA294545";
 
 function getNetworkName(chainId) {
   switch (chainId) {
