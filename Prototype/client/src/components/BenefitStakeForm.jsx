@@ -1,8 +1,10 @@
+// BenefitStakeForm.jsx
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
+import styles from "./BenefitStakeForm.module.css";
 
-const CONTRACT_ADDRESS = "0x074dE1686d2D81690FBabdf7F5336e58AC1Cd46c"; // ✅ update if changed
+const CONTRACT_ADDRESS = "0x074dE1686d2D81690FBabdf7F5336e58AC1Cd46c";
 
 function getNetworkName(chainId) {
   switch (chainId) {
@@ -100,7 +102,7 @@ export default function BenefitStakeForm() {
       }
 
       const tx = await contract.startGoal(
-        ethers.toBigInt(stepGoal), // ✅ pass step goal as argument
+        ethers.toBigInt(stepGoal),
         { value: ethers.parseEther(stakeAmount) }
       );
 
@@ -126,62 +128,43 @@ export default function BenefitStakeForm() {
   const explorerUrl = account && explorerBase ? explorerBase + account : "#";
 
   return (
-    <div style={{
-      maxWidth: 440, margin: "100px auto", padding: 24, borderRadius: 16,
-      boxShadow: "0 2px 12px #0001", background: "#fff"
-    }}>
-      <h2 style={{ textAlign: "center", marginBottom: 20 }}>BEneFIT: Stake For Your Fitness Goal</h2>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h2 className={styles.heading}>🔥 BEneFIT Challenge: Lock ETH for Your Goal</h2>
 
-      {!account ? (
-        <button onClick={connectWallet}
-          style={{ width: "100%", padding: 12, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 8 }}>
-          Connect MetaMask
-        </button>
-      ) : (
-        <>
-          <div style={{
-            background: "#f9fafb", borderRadius: 12, padding: 16,
-            marginBottom: 18, fontSize: 13, boxShadow: "0 1px 4px #0001"
-          }}>
-            <strong>Account Details</strong>
-            <div><b>Address:</b> {account}</div>
-            <div><b>ETH Balance:</b> {balance} ETH</div>
-            <div><b>Network:</b> {network}</div>
-            <div><b>Explorer:</b> <a href={explorerUrl} target="_blank" rel="noopener noreferrer">{explorerUrl}</a></div>
-          </div>
+        {!account ? (
+          <button onClick={connectWallet} className={styles.connectBtn}>
+            🔗 Connect Wallet
+          </button>
+        ) : (
+          <>
+            <div className={styles.accountCard}>
+              <div><strong>Address:</strong> {account}</div>
+              <div><strong>Balance:</strong> {balance} ETH</div>
+              <div><strong>Network:</strong> {network}</div>
+              <div><strong>Explorer:</strong> <a href={explorerUrl} target="_blank" rel="noreferrer" style={{ color: "#60a5fa", wordBreak: "break-all", display: "inline-block", overflowWrap: "anywhere" }}>{explorerUrl}</a></div>
+            </div>
 
-          <form onSubmit={stakeETH}>
-            <label>Target Step Count</label>
-            <input
-              type="number"
-              min="1"
-              value={stepGoal}
-              onChange={e => setStepGoal(e.target.value)}
-              placeholder="e.g. 10000"
-              style={{ width: "100%", padding: 8, marginBottom: 12, borderRadius: 6, border: "1px solid #ccc" }}
-            />
+            <form onSubmit={stakeETH}>
+              <label className={styles.label}>🎯 Step Goal</label>
+              <input type="number" value={stepGoal} min="1"
+                onChange={e => setStepGoal(e.target.value)} placeholder="e.g. 10000" className={styles.input} />
 
-            <label>ETH to Stake</label>
-            <input
-              type="number"
-              min="0.001"
-              step="0.001"
-              value={stakeAmount}
-              onChange={e => setStakeAmount(e.target.value)}
-              placeholder="e.g. 0.01"
-              style={{ width: "100%", padding: 8, marginBottom: 18, borderRadius: 6, border: "1px solid #ccc" }}
-            />
+              <label className={styles.label}>💎 ETH to Stake</label>
+              <input type="number" value={stakeAmount} min="0.001" step="0.001"
+                onChange={e => setStakeAmount(e.target.value)} placeholder="e.g. 0.01" className={styles.input} />
 
-            <button
-              type="submit"
-              style={{ width: "100%", padding: 12, background: "#10b981", color: "#fff", border: "none", borderRadius: 8 }}>
-              Stake ETH & Start Goal
-            </button>
-          </form>
-        </>
-      )}
+              <button type="submit" className={styles.stakeBtn}>
+                🚀 Stake & Launch
+              </button>
+            </form>
+          </>
+        )}
 
-      {txStatus && <div style={{ marginTop: 18, color: "#334155", fontWeight: "bold" }}>{txStatus}</div>}
+        {txStatus && (
+          <div className={styles.txStatus}>{txStatus}</div>
+        )}
+      </div>
     </div>
   );
 }

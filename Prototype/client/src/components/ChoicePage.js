@@ -1,23 +1,21 @@
 import React from "react";
+import styles from "./ChoicePage.module.css";
 
 export default function ChoicePage({ onSelect }) {
   return (
-    <div style={{ textAlign: "center", marginTop: 100 }}>
-      <h2>BEneFIT Fitness Challenge</h2>
-      <p>What would you like to do?</p>
-      <button onClick={() => onSelect("start")} style={btnStyle}>Start New Goal</button>
-      <button onClick={() => onSelect("validate")} style={btnStyle}>Validate Existing Goal</button>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h2 className={styles.heading}>🏋️ BEneFIT Fitness Challenge</h2>
+        <p className={styles.subtext}>Choose your next step to stay on track!</p>
+        <div className={styles.buttonGroup}>
+          <button onClick={() => onSelect("start")} className={styles.button}>
+            🚀 Start New Goal
+          </button>
+          <button onClick={() => onSelect("validate")} className={styles.button}>
+            ✅ Validate Existing Goal
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
-
-const btnStyle = {
-  margin: 10,
-  padding: 12,
-  fontSize: 16,
-  background: "#3b82f6",
-  color: "#fff",
-  border: "none",
-  borderRadius: 8,
-  cursor: "pointer"
-};
