@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
-// import dotenv from "dotenv";
 import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
 
-// dotenv.config();
-
-const CONTRACT_ADDRESS = "0x59EF809743b82883031FEF835f67cbb6dA294545";
+const CONTRACT_ADDRESS = "0x074dE1686d2D81690FBabdf7F5336e58AC1Cd46c"; // ✅ update if changed
 
 function getNetworkName(chainId) {
   switch (chainId) {
@@ -38,35 +35,28 @@ export default function BenefitStakeForm() {
 
   useEffect(() => {
     if (!window.ethereum) return;
-    const handleChainChanged = () => {
-      connectWallet();
-    };
-    const handleAccountsChanged = () => {
-      connectWallet();
-    };
+    const handleChainChanged = () => connectWallet();
+    const handleAccountsChanged = () => connectWallet();
     window.ethereum.on("chainChanged", handleChainChanged);
     window.ethereum.on("accountsChanged", handleAccountsChanged);
     return () => {
       window.ethereum.removeListener("chainChanged", handleChainChanged);
       window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
     };
-    // eslint-disable-next-line
   }, []);
 
   async function ensureSepolia() {
-    if (!window.ethereum) return false;
     const provider = new ethers.BrowserProvider(window.ethereum);
     const net = await provider.getNetwork();
     if (Number(net.chainId) !== 11155111) {
       try {
-        // Ask MetaMask to switch to Sepolia
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0xaa36a7' }], // Hex for 11155111
+          params: [{ chainId: '0xaa36a7' }],
         });
         return true;
-      } catch (switchError) {
-        alert("Please switch MetaMask to Sepolia Testnet and connect again.");
+      } catch {
+        alert("Please switch MetaMask to Sepolia Testnet.");
         return false;
       }
     }
@@ -84,14 +74,10 @@ export default function BenefitStakeForm() {
     setAccount(accounts[0]);
     const provider = new ethers.BrowserProvider(window.ethereum);
     const bal = await provider.getBalance(accounts[0]);
-    setBalance(ethers.formatEther(bal));
     const net = await provider.getNetwork();
+    setBalance(ethers.formatEther(bal));
     setChainId(Number(net.chainId));
     setNetwork(getNetworkName(Number(net.chainId)));
-    // Debugging logs
-    console.log("Selected Account:", accounts[0]);
-    console.log("Network:", net.name, net.chainId);
-    console.log("Balance (ETH):", ethers.formatEther(bal));
   }
 
   async function stakeETH(e) {
@@ -100,27 +86,39 @@ export default function BenefitStakeForm() {
       alert("Please fill both fields.");
       return;
     }
+
     try {
-      setTxStatus("Waiting for transaction...");
+      setTxStatus("⏳ Waiting for transaction...");
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, BenefitABI.abi, signer);
 
-      const tx = await contract.startGoal({ value: ethers.parseEther(stakeAmount) });
+      const existingGoal = await contract.getGoalStatus(await signer.getAddress());
+      if (existingGoal[0] > 0n) {
+        setTxStatus("⚠️ You already have an active goal.");
+        return;
+      }
+
+      const tx = await contract.startGoal(
+        ethers.toBigInt(stepGoal), // ✅ pass step goal as argument
+        { value: ethers.parseEther(stakeAmount) }
+      );
+
       await tx.wait();
-
-      // Update balance after successful transaction
-      const userAddress = await signer.getAddress();
-      const newBal = await provider.getBalance(userAddress);
+      const newBal = await provider.getBalance(await signer.getAddress());
       setBalance(ethers.formatEther(newBal));
-
-      setTxStatus("Stake successful! ETH locked until your goal is validated.");
+      setTxStatus("✅ Stake successful! ETH locked.");
     } catch (err) {
-      let msg = "Transaction failed.";
-      if (err.reason) msg += " " + err.reason;
-      else if (err.message) msg += " " + err.message;
+      let msg = "❌ Transaction failed.";
+      if (err.code === "CALL_EXCEPTION") {
+        msg += "\n➡️ Possible reasons:\n• Active goal exists\n• Insufficient ETH sent";
+      } else if (err.reason) {
+        msg += " " + err.reason;
+      } else if (err.message) {
+        msg += " " + err.message;
+      }
+      console.error("Stake Error:", err);
       setTxStatus(msg);
-      console.error(err);
     }
   }
 
@@ -133,51 +131,37 @@ export default function BenefitStakeForm() {
       boxShadow: "0 2px 12px #0001", background: "#fff"
     }}>
       <h2 style={{ textAlign: "center", marginBottom: 20 }}>BEneFIT: Stake For Your Fitness Goal</h2>
+
       {!account ? (
         <button onClick={connectWallet}
-                style={{ width: "100%", padding: 12, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 8 }}>
+          style={{ width: "100%", padding: 12, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 8 }}>
           Connect MetaMask
         </button>
       ) : (
         <>
-          {/* ACCOUNT INFO CARD */}
           <div style={{
-            background: "#f9fafb",
-            borderRadius: 12,
-            padding: 16,
-            marginBottom: 18,
-            fontSize: 13,
-            boxShadow: "0 1px 4px #0001",
+            background: "#f9fafb", borderRadius: 12, padding: 16,
+            marginBottom: 18, fontSize: 13, boxShadow: "0 1px 4px #0001"
           }}>
             <strong>Account Details</strong>
             <div><b>Address:</b> {account}</div>
-            <div><b>ETH Balance:</b> {balance || "0"} ETH</div>
-            <div><b>Network:</b> {network || "Unknown"}</div>
-            <div>
-              <b>Explorer:</b>{" "}
-              <a
-                href={explorerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#3b82f6", wordBreak: "break-all" }}
-              >
-                {explorerUrl}
-              </a>
-            </div>
+            <div><b>ETH Balance:</b> {balance} ETH</div>
+            <div><b>Network:</b> {network}</div>
+            <div><b>Explorer:</b> <a href={explorerUrl} target="_blank" rel="noopener noreferrer">{explorerUrl}</a></div>
           </div>
-          {/* END ACCOUNT INFO CARD */}
 
           <form onSubmit={stakeETH}>
-            <label style={{ display: "block", margin: "12px 0 4px" }}>Target Step Count</label>
+            <label>Target Step Count</label>
             <input
               type="number"
               min="1"
               value={stepGoal}
               onChange={e => setStepGoal(e.target.value)}
               placeholder="e.g. 10000"
-              style={{ width: "100%", padding: 8, borderRadius: 6, border: "1px solid #ccc" }}
+              style={{ width: "100%", padding: 8, marginBottom: 12, borderRadius: 6, border: "1px solid #ccc" }}
             />
-            <label style={{ display: "block", margin: "12px 0 4px" }}>ETH to Stake</label>
+
+            <label>ETH to Stake</label>
             <input
               type="number"
               min="0.001"
@@ -185,16 +169,18 @@ export default function BenefitStakeForm() {
               value={stakeAmount}
               onChange={e => setStakeAmount(e.target.value)}
               placeholder="e.g. 0.01"
-              style={{ width: "100%", padding: 8, borderRadius: 6, border: "1px solid #ccc" }}
+              style={{ width: "100%", padding: 8, marginBottom: 18, borderRadius: 6, border: "1px solid #ccc" }}
             />
+
             <button
               type="submit"
-              style={{ marginTop: 18, width: "100%", padding: 12, background: "#10b981", color: "#fff", border: "none", borderRadius: 8 }}>
+              style={{ width: "100%", padding: 12, background: "#10b981", color: "#fff", border: "none", borderRadius: 8 }}>
               Stake ETH & Start Goal
             </button>
           </form>
         </>
       )}
+
       {txStatus && <div style={{ marginTop: 18, color: "#334155", fontWeight: "bold" }}>{txStatus}</div>}
     </div>
   );
