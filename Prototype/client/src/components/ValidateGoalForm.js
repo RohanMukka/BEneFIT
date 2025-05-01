@@ -60,7 +60,6 @@ export default function ValidateGoalForm() {
       const data = await res.json();
       if (data.steps !== undefined) setSteps(data.steps);
 
-      // Automatically validate if goal is met and not already validated
       if (
         data.steps >= goalData.stepGoal &&
         !goalData.validated &&
@@ -69,18 +68,15 @@ export default function ValidateGoalForm() {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(CONTRACT_ADDRESS, BenefitABI.abi, signer);
-        // Ask backend (oracle/owner) to validate on-chain
-await fetch("http://localhost:5050/api/validate-onchain", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ userAddress: account })
-});
 
-setMessage("✅ Step goal reached. Validation request sent!");
-await connectWallet();  // Refresh status
+        await fetch("http://localhost:5050/api/validate-onchain", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userAddress: account })
+        });
 
-        setMessage("✅ Step goal reached and validated!");
-        await connectWallet(); // Refresh goalData
+        setMessage("✅ Step goal reached. Validation request sent!");
+        await connectWallet();  // Refresh status
       } else {
         setMessage(data.message || "Step count checked.");
       }
@@ -132,7 +128,7 @@ await connectWallet();  // Refresh status
             </p>
           )}
 
-          {goalData.validated && !goalData.withdrawn && steps !== null && steps >= goalData.stepGoal && (
+          {goalData.validated && !goalData.withdrawn && (
             <button onClick={withdrawFunds} style={{ ...btnStyle, background: "#6366f1", marginTop: 16 }}>
               💸 Withdraw Staked ETH
             </button>
