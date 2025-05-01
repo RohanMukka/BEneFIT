@@ -1,12 +1,12 @@
 # Methodology – Lock-and-Release Model
 <div align="justify">
-The BEneFIT project leverages a modular, decentralized architecture and a privacy-focused ETH lockup system to encourage fitness goal adherence without peer competition. This methodology details the architecture, workflow, and smart contract design powering the **Lock-and-Release** variant of the platform.
+The BEneFIT project implements a decentralized fitness accountability system through the **Lock-and-Release model**, where users lock ETH when committing to a fitness goal. Upon successful completion, verified via APIs, the ETH is released back to the user — ensuring trustless motivation with no peer competition.
 
 ---
 
 ## 1. System Architecture
 
-The system is divided into functional layers: **User Layer**, **Fitness Tracking**, **Backend/Middleware**, **Blockchain Layer**, and **Validation Layer**. These interact securely to enable ETH-based commitment toward fitness goals.
+The system is modular and streamlined to support fully automated, validator-free operation using fitness APIs and optional ML fraud detection.
 
 **Figure 1: System Architecture**
 
@@ -17,25 +17,22 @@ The system is divided into functional layers: **User Layer**, **Fitness Tracking
 </div>
 
 - **User Layer:**  
-  - The BEneFIT dApp allows users to set personal goals, lock ETH via wallet, and monitor progress.
-  
-- **Fitness Tracking:**  
-  - Fitness data is collected via **Google Fit** or **Apple Health** APIs, optionally supported by manual upload.
+  - Users set personal fitness goals, stake ETH, and track progress through the BEneFIT dApp.
+
+- **Fitness Tracking Layer:**  
+  - Fitness data is pulled directly from **Google Fit** or **Apple Health** APIs, ensuring reliability.
 
 - **Backend/Middleware:**  
-  - Normalizes data, optionally runs fraud detection (ML), and interfaces with the smart contract.
+  - Normalizes API data, verifies completion conditions, and optionally runs an ML fraud-detection engine.
 
 - **Blockchain Layer:**  
-  - A smart contract holds user ETH in a vault and automates validation and fund release logic.
-
-- **Validation Layer:**  
-  - A set of peer validators anonymously review submitted fitness data and vote on legitimacy.
+  - Smart contracts manage ETH staking, time-bound goals, and automated refund triggers.
 
 ---
 
 ## 2. User Workflow
 
-BEneFIT’s Lock-and-Release model follows an intuitive, trustless fitness journey broken into phases.
+The Lock-and-Release process is straightforward, ensuring trustless behavior through verified tracking.
 
 **Figure 2: User Workflow**
 
@@ -45,29 +42,31 @@ BEneFIT’s Lock-and-Release model follows an intuitive, trustless fitness journ
 
 </div>
 
-### 2.1 Goal Locking
+### 2.1 Goal Setup
 
-- User submits a personal fitness goal through the dApp and stakes ETH into a smart contract.
-- The goal is anonymously reviewed and approved by at least 2/3 of peer validators.
-- If approved, the ETH is locked and the challenge begins.
+- The user submits a fitness goal (e.g., 10,000 steps/day for 30 days) via the dApp.
+- ETH is staked into the smart contract.
+- Goal configuration (duration, metrics) is stored on-chain.
 
-### 2.2 Fitness Tracking
+### 2.2 Activity Monitoring
 
-- User performs the goal over the agreed period (e.g., 4 weeks).
-- Data is collected automatically or manually, hashed for privacy, and uploaded to the dApp.
-- Optionally, ML-based fraud detection flags anomalies before submission.
+- As the user performs the activity:
+  - Fitness data is fetched via APIs (Google Fit / Apple Health).
+  - Data is regularly synced or submitted manually via API tokens.
+  - Optionally, the backend checks for anomalies using ML (e.g., CNN models trained to detect fake walking).
 
-### 2.3 Result Validation
+### 2.3 Goal Completion & ETH Release
 
-- At the end of the challenge, validators review submitted evidence and vote.
-- If 2/3 approve, the user is refunded their ETH stake.
-- If not, ETH remains locked or is returned after a cooldown (no redistribution).
+- At the end of the goal period:
+  - The backend compares recorded data against the goal.
+  - If completion conditions are met, the smart contract **automatically releases** the staked ETH back to the user.
+  - If not met, ETH remains locked or returned after a grace period.
 
 ---
 
 ## 3. Smart Contract Architecture
 
-The BEneFIT Lock-and-Release contract handles all aspects of user staking, data handling, and vote-based fund release.
+The BEneFIT Lock-and-Release contract handles all aspects of the ETH staking lifecycle without any human validation.
 
 **Figure 3: Smart Contract Architecture**
 
@@ -79,40 +78,38 @@ The BEneFIT Lock-and-Release contract handles all aspects of user staking, data 
 
 ### Main Modules
 
-- **Staking Module:** Accepts ETH and ties it to user-specific goal IDs.
-- **Goal Management:** Tracks goal submissions and approval voting.
-- **Data Submission:** Accepts data hashes or proof tokens for completed challenges.
-- **Validation Logic:** Tally votes and determine fund release outcome.
-- **Payout Module:** Refunds staked ETH if goals are validated; holds it otherwise.
-- **Event Logging:** Emits all major events for auditability.
+- **Staking Module:** Accepts and locks ETH for submitted goals.
+- **Goal Management:** Stores time, metrics, and user requirements.
+- **Data Validator Interface:** Expects verified completion signal from backend via oracle or off-chain trigger.
+- **Payout Module:** Automatically refunds ETH if the goal is completed.
+- **Event Logging:** All transactions, staking, and release events are publicly logged.
 
 ### Actors
 
-- **User:** Stakes ETH and completes personal goals.
-- **Validator:** Reviews goals and data, casts votes, and builds trust.
-- **Fitness Oracle (optional):** Certifies fitness data integrity from APIs or wearables.
+- **User:** Sets goals, locks ETH, syncs data via API tokens.
+- **Backend System:** Verifies goal progress, signals success/failure.
+- **Smart Contract:** Controls ETH logic and enforces deadlines.
 
 ---
 
 ## 4. Data Verification & Fraud Prevention
 
-- Integrates Google Fit / Apple HealthKit for API-verified data.
-- Optionally runs a CNN-based model to detect fake activity patterns (e.g., auto-walking).
-- Flags outliers before validator review.
+- Fitness metrics (steps, distance, duration) are fetched directly via Google Fit / Apple Health APIs.
+- Optional CNN-based fraud detection can be run off-chain to classify real vs fake motion.
+- Only verified data triggers ETH release; tampered or incomplete data results in failed completion.
 
 ---
 
 ## 5. Privacy & Security
 
-- Users are pseudonymous (identified only by wallet addresses).
-- Fitness data is hashed before submission to preserve confidentiality.
-- Votes and payouts are public, but private fitness details remain hidden.
+- No user registration — only wallet addresses are used.
+- Fitness data is hashed or tokenized to avoid storing raw values on-chain.
+- The platform avoids third-party validators, ensuring full automation and data integrity.
 
 ---
 
 ## 6. Summary
 
-The Lock-and-Release model promotes personal fitness accountability without the pressure of losing funds to others. ETH is staked as motivation and only returned upon success. Validators ensure fairness, and ML-based fraud detection boosts integrity. This model is ideal for users seeking **non-competitive, self-driven fitness incentives** in a decentralized environment.
+The Lock-and-Release model is a fully automated, non-punitive mechanism to promote fitness adherence through crypto incentives. By eliminating peer validators and relying on **API-based data verification**, BEneFIT ensures a seamless and fair experience that respects user privacy and provides accountability through on-chain commitments.
 
----
 </div>
