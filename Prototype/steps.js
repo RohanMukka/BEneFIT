@@ -1,12 +1,15 @@
+
 const axios = require('axios');
 require('dotenv').config();
 
-// Paste your access token here (from Playground or your OAuth2 flow)
-const accessToken = 'ya29.a0AZYkNZifNXguotswQ4HI97qzEK2rXvHQ9YPnA2ZD1dXoWMIuhBg7T7OBw3vz0jv-mlVnuAoiyD91BQZJZZRxomx7t3W58Sp9Jx6FAUcwPd0kuWIgiTmktduc5FpE5hXFtuiIGTWCVT0zz4k2dGvQzCspZ6PaoQzCKjVcdJ9eaCgYKAeMSARYSFQHGX2MiFtuxf-g-ijaLJcdamel2tQ0175';
-// Get midnight today and current time in milliseconds
+// Paste your valid OAuth2 access token here
+const accessToken = 'ya29.a0AZYkNZjOWxZNbbyKpcZR2PEH0C5HYZqbX5C9jNH525-T0m1f8v_6ZIyqctr8_bwgEwET2i_0R8DXJov3NBzb2jq0lFabb-xlRUxLz_EvpY0WWyzsFjcmHcl8EU25jlM8vYQhpZ_hfsSQzXJh2aEIEcosYqY2NcPeqgACzByGaCgYKARwSARYSFQHGX2MiJZ7zG9YRU5eufqUY2IsVog0175';
+
+
+// Get today's midnight and current time (LOCAL timezone)
 const now = Date.now();
 const midnight = new Date();
-midnight.setHours(0, 0, 0, 0);
+midnight.setHours(0, 0, 0, 0);  // 12:00 AM local time
 const startTimeMillis = midnight.getTime();
 const endTimeMillis = now;
 
@@ -16,7 +19,7 @@ const data = {
   aggregateBy: [{
     dataTypeName: 'com.google.step_count.delta'
   }],
-  bucketByTime: { durationMillis: 86400000 },
+  bucketByTime: { durationMillis: endTimeMillis - startTimeMillis },
   startTimeMillis,
   endTimeMillis
 };
@@ -27,17 +30,21 @@ axios.post(url, data, {
     'Content-Type': 'application/json'
   }
 })
-  .then(response => {
-    const buckets = response.data.bucket;
-    let totalSteps = 0;
-    if (buckets && buckets.length > 0) {
-      const dataset = buckets[0].dataset[0];
-      if (dataset && dataset.point && dataset.point.length > 0) {
-        totalSteps = dataset.point[0].value[0].intVal;
+.then(response => {
+  const buckets = response.data.bucket;
+  let totalSteps = 0;
+  if (buckets && buckets.length > 0) {
+    buckets.forEach(bucket => {
+      const dataset = bucket.dataset[0];
+      if (dataset.point && dataset.point.length > 0) {
+        dataset.point.forEach(point => {
+          totalSteps += point.value[0].intVal || 0;
+        });
       }
-    }
-    console.log(`Steps taken today: ${totalSteps}`);
-  })
-  .catch(error => {
-    console.error('Error fetching steps:', error.response ? error.response.data : error.message);
-  });
+    });
+  }
+  console.log(`Steps taken since midnight: ${totalSteps}`);
+})
+.catch(error => {
+  console.error('Error fetching steps:', error.response ? error.response.data : error.message);
+});
