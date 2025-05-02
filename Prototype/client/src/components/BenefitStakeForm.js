@@ -1,7 +1,10 @@
-// BenefitStakeForm.js
+import '../App.css';
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
+import { motion } from "framer-motion";
+import toast, { Toaster } from 'react-hot-toast';
+import { FaEthereum, FaBullseye, FaLock } from "react-icons/fa";
 
 const CONTRACT_ADDRESS = "0x074dE1686d2D81690FBabdf7F5336e58AC1Cd46c";
 
@@ -32,7 +35,6 @@ export default function BenefitStakeForm() {
   const [balance, setBalance] = useState("");
   const [network, setNetwork] = useState("");
   const [chainId, setChainId] = useState(null);
-  const [txStatus, setTxStatus] = useState("");
 
   useEffect(() => {
     if (!window.ethereum) return;
@@ -84,19 +86,20 @@ export default function BenefitStakeForm() {
   async function stakeETH(e) {
     e.preventDefault();
     if (!stepGoal || !stakeAmount) {
-      alert("Please fill both fields.");
+      toast.error("Please fill both fields.");
       return;
     }
 
     try {
-      setTxStatus("⏳ Waiting for transaction...");
+      toast.loading("Waiting for transaction...");
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, BenefitABI.abi, signer);
 
       const existingGoal = await contract.getGoalStatus(await signer.getAddress());
       if (existingGoal[0] > 0n) {
-        setTxStatus("⚠️ You already have an active goal.");
+        toast.dismiss();
+        toast.error("You already have an active goal.");
         return;
       }
 
@@ -108,18 +111,12 @@ export default function BenefitStakeForm() {
       await tx.wait();
       const newBal = await provider.getBalance(await signer.getAddress());
       setBalance(ethers.formatEther(newBal));
-      setTxStatus("✅ Stake successful! ETH locked.");
+      toast.dismiss();
+      toast.success("Stake successful! ETH locked.");
     } catch (err) {
-      let msg = "❌ Transaction failed.";
-      if (err.code === "CALL_EXCEPTION") {
-        msg += "\n➡️ Possible reasons:\n• Active goal exists\n• Insufficient ETH sent";
-      } else if (err.reason) {
-        msg += " " + err.reason;
-      } else if (err.message) {
-        msg += " " + err.message;
-      }
+      toast.dismiss();
       console.error("Stake Error:", err);
-      setTxStatus(msg);
+      toast.error(err.reason || err.message || "Transaction failed.");
     }
   }
 
@@ -127,48 +124,97 @@ export default function BenefitStakeForm() {
   const explorerUrl = account && explorerBase ? explorerBase + account : "#";
 
   return (
-    <div style={containerStyle}>
-      <h1 style={titleStyle}>🏁 Stake for Your Fitness Goal</h1>
-      <p style={descStyle}>Commit ETH toward your step target. Stay fit and earn it back!</p>
+    <div style={navWrapperStyle}>
+      <nav style={navbarStyle}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.6rem',
+          fontWeight: 700,
+          fontSize: '1.5rem',
+          color: '#111827',
+          fontFamily: 'Segoe UI, sans-serif'
+        }}>
+          BEneFIT
+        </div>
+        <div style={{ display: "flex", gap: "1.5rem" }}>
+          <a href="/" className="nav-link">🏠 Home</a>
+          <a href="/stake" className="nav-link">💰 Stake</a>
+          <a href="/validate" className="nav-link">✅ Validate</a>
+        </div>
+      </nav>
 
-      {!account ? (
-        <button onClick={connectWallet} style={{ ...btnStyle, background: "#3b82f6" }}>
-          🔗 Connect MetaMask
-        </button>
-      ) : (
-        <>
-          <div style={infoCard}>
-            <p><b>Wallet:</b> {account}</p>
-            <p><b>ETH Balance:</b> {balance}</p>
-            <p><b>Network:</b> {network}</p>
-            <p><b>Explorer:</b> <a href={explorerUrl} target="_blank" rel="noopener noreferrer">{explorerUrl}</a></p>
-          </div>
+      <motion.div style={containerStyle} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <Toaster position="top-center" />
+        <h1 style={titleStyle}><FaBullseye style={{ marginRight: 10 }} />Stake for Your Fitness Goal</h1>
+        <p style={descStyle}>Commit ETH toward your step target. Stay fit and earn it back!</p>
 
-          <form onSubmit={stakeETH}>
+        {!account ? (
+          <button onClick={connectWallet} style={{ ...btnStyle, background: "#3b82f6" }}>
+            🔗 Connect MetaMask
+          </button>
+        ) : (
+          <>
+            <div style={{ marginBottom: "2rem", fontSize: "1rem", lineHeight: "1.75" }}>
+              <p><FaEthereum /> <b>Address:</b> {account}</p>
+              <p><b>Balance:</b> {balance} ETH</p>
+              <p><b>Network:</b> {network}</p>
+              <p><b>Explorer:</b> <a href={explorerUrl} target="_blank" rel="noopener noreferrer">{explorerUrl}</a></p>
+            </div>
+
             <label style={labelStyle}>Target Step Count</label>
             <input type="number" value={stepGoal} min="1" onChange={e => setStepGoal(e.target.value)} style={inputStyle} placeholder="e.g. 10000" />
 
             <label style={labelStyle}>ETH to Stake</label>
             <input type="number" value={stakeAmount} min="0.001" step="0.001" onChange={e => setStakeAmount(e.target.value)} style={inputStyle} placeholder="e.g. 0.01" />
 
-            <button type="submit" style={{ ...btnStyle, background: "#10b981" }}>💰 Stake ETH & Start Goal</button>
-          </form>
-        </>
-      )}
-
-      {txStatus && <div style={statusStyle}>{txStatus}</div>}
+            <button onClick={stakeETH} style={{ ...btnStyle, background: "#10b981" }}>
+              <FaLock style={{ marginRight: 8 }} /> Stake ETH & Start Goal
+            </button>
+          </>
+        )}
+      </motion.div>
     </div>
   );
 }
 
 // --- Styling ---
+const navWrapperStyle = {
+  width: "100%",
+  position: "relative",
+  top: 0,
+  left: 0,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  background: "#f9fafb"
+};
+
+const navbarStyle = {
+  width: "100%",
+  maxWidth: "1280px",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "1rem 2rem",
+  background: "#ffffff10",
+  backdropFilter: "blur(20px)",
+  border: "1px solid rgba(255, 255, 255, 0.1)",
+  borderRadius: "20px",
+  margin: "1.25rem auto",
+  boxShadow: "0 12px 32px rgba(0,0,0,0.1)",
+  position: "sticky",
+  top: "1rem",
+  zIndex: 1000
+};
+
 const containerStyle = {
   minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  background: "linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%)",
+  background: "radial-gradient(circle at top left, #f3e8ff, #e0f2fe)",
   padding: "2rem",
   fontFamily: "'Segoe UI', Tahoma, sans-serif",
   color: "#111827"
@@ -177,9 +223,11 @@ const containerStyle = {
 const titleStyle = {
   fontSize: "2.3rem",
   fontWeight: "bold",
-  color: "#111827",
   marginBottom: "0.5rem",
-  textAlign: "center"
+  textAlign: "center",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center"
 };
 
 const descStyle = {
@@ -187,17 +235,6 @@ const descStyle = {
   color: "#4b5563",
   marginBottom: "1.5rem",
   textAlign: "center"
-};
-
-const infoCard = {
-  background: "#f9fafb",
-  padding: "1rem",
-  borderRadius: "10px",
-  marginBottom: "1rem",
-  width: "100%",
-  maxWidth: "400px",
-  boxShadow: "inset 0 1px 4px rgba(0,0,0,0.05)",
-  fontSize: "0.95rem"
 };
 
 const labelStyle = {
@@ -209,6 +246,7 @@ const labelStyle = {
 
 const inputStyle = {
   width: "100%",
+  maxWidth: "400px",
   padding: "0.75rem",
   borderRadius: "8px",
   border: "1px solid #ccc",
@@ -217,6 +255,7 @@ const inputStyle = {
 
 const btnStyle = {
   width: "100%",
+  maxWidth: "400px",
   marginTop: "1.5rem",
   padding: "1rem",
   fontSize: "1rem",
@@ -226,12 +265,4 @@ const btnStyle = {
   fontWeight: "600",
   cursor: "pointer",
   boxShadow: "0 6px 14px rgba(0,0,0,0.1)"
-};
-
-const statusStyle = {
-  marginTop: "1.5rem",
-  fontWeight: "500",
-  color: "#334155",
-  whiteSpace: "pre-wrap",
-  textAlign: "center"
 };

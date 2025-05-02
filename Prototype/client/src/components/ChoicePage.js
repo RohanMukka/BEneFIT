@@ -1,10 +1,19 @@
+// ChoicePage.js (with animation and icons)
+import '../App.css';
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaWalking, FaRocket } from "react-icons/fa";
 
 export default function ChoicePage() {
   return (
-    <div style={containerStyle}>
-      <h1 style={titleStyle}>🚀 BEneFIT Fitness Challenge</h1>
+    <motion.div
+      style={containerStyle}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <h1 style={titleStyle}><FaRocket style={{ marginRight: 10 }} />BEneFIT Fitness Challenge</h1>
       <p style={descStyle}>Unlock your fitness potential with crypto-backed motivation.</p>
 
       <div style={buttonGroupStyle}>
@@ -24,7 +33,7 @@ export default function ChoicePage() {
       <footer style={footerStyle}>
         Built with ❤️ for your health. Powered by Ethereum.
       </footer>
-    </div>
+    </motion.div>
   );
 }
 
@@ -36,7 +45,8 @@ const containerStyle = {
   justifyContent: "center",
   alignItems: "center",
   background: "linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%)",
-  padding: "2rem"
+  padding: "2rem",
+  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
 };
 
 const titleStyle = {
@@ -44,13 +54,16 @@ const titleStyle = {
   fontWeight: "bold",
   marginBottom: "0.5rem",
   color: "#111827",
-  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center"
 };
 
 const descStyle = {
   fontSize: "1.2rem",
   marginBottom: "2rem",
-  color: "#4b5563"
+  color: "#4b5563",
+  textAlign: "center"
 };
 
 const buttonGroupStyle = {

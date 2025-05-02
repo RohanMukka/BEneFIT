@@ -45,6 +45,12 @@ contract BenefitLockAndReleaseNoDeadline {
 
         emit GoalStarted(msg.sender, msg.value, _stepGoal);
     }
+    function validateGoal() public {
+    Goal storage g = goals[msg.sender];
+    require(g.amount > 0, "No active goal.");
+    require(!g.validated, "Already validated.");
+    g.validated = true;
+}
 
     /// @notice Called by contract owner (oracle) to validate goal
     function validateGoal(address user) external onlyOwner {

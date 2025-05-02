@@ -1,0 +1,21 @@
+.nav-link {
+    color: #111827;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(161, 163, 185, 0.422);
+    backdrop-filter: blur(8px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(26, 19, 57, 0.06);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  
