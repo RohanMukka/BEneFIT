@@ -1,5 +1,5 @@
 # BEneFIT: A Decentralized Fitness Accountability Framework
-
+<div align="justify">
 BEneFIT is a research-backed framework that leverages decentralized technologies and behavioral psychology to encourage users to stick to their fitness goals. It introduces ETH-backed staking, fraud-resistant validation, and smart contract enforcement — all while offering flexible incentive models designed to match different user preferences.
 
 ---
