@@ -1,5 +1,6 @@
 # Related Work
 <div align="justify">
+
 ## 1. Why Move-to-Earn Is a Big Deal
 
 Getting people to move more is a problem that never seems to go away, no matter how many step counters or fitness apps we install. For a lot of us, those little badges or calorie charts just aren’t enough to keep us going for more than a week or two. This is why Move-to-Earn (M2E) apps have become such an interesting trend in the last few years. The core idea is simple: if you give people something real—money, tokens, or even just the chance to win prizes—they’re much more likely to stick with a new habit.
@@ -63,10 +64,3 @@ Our project, BEneFIT, was designed with all these issues in mind. Here’s what 
 - **Choice of reward model:** Some people like competition, others just want to prove something to themselves. BEneFIT lets users pick between a competitive (redistribution) and non-competitive (lock-and-release) approach.
 
 
----
-
-## References
-
-1. Lee S. Real Steps or Not: Auto-Walker Detection in Move-to-Earn Applications. *Sensors* (Basel). 2025 Feb 7;25(4):1002. https://doi.org/10.3390/s25041002.  
-2. Elliott M, Eck F, Khmelev E, Derlyatka A, Fomenko O. Physical Activity Behavior Change Driven by Engagement With an Incentive-Based App: Evaluating the Impact of Sweatcoin. *JMIR Mhealth Uhealth*. 2019;7(7):e12445. https://doi.org/10.2196/12445.  
-3. Spika D, Wickström Östervall L, Gerdtham U, Wengström E. Put a bet on it: Can self-funded commitment contracts curb fitness procrastination? *J Health Econ*. 2024 Dec;98:102943. https://doi.org/10.1016/j.jhealeco.2024.102943.
