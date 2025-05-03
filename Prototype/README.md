@@ -3,7 +3,19 @@
 This project is a decentralized fitness accountability platform where users stake ETH toward fitness goals, verified by a smart contract.
 
 ---
+## 🛠️ Prerequisites
 
+Before running the project, make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v16 or above)
+- [MetaMask browser extension](https://metamask.io/) for interacting with Ethereum
+- [Hardhat](https://hardhat.org/) (comes with the project; installed via `npm install`)
+- [Git](https://git-scm.com/) (optional, for cloning the repo)
+
+You should also have:
+- Basic familiarity with React and Ethereum transactions
+- A browser like Chrome or Firefox (MetaMask compatible)
+---
 ## 📚 How to Run
 
 ### 1. Start the Frontend
