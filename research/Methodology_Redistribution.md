@@ -34,7 +34,7 @@ Incentivizing fitness with monetary rewards is not new—apps like **Stepn**, **
 
 ---
 
-## 📌 2. What This Model Does (In Detail)
+## 📌 2. What This Model Does 
 
 The **BEneFIT Redistribution Model** creates a self-governing ecosystem where users **stake ETH**, submit **fitness goals**, and get **rewards or penalties** based on whether they complete their goals—and whether the community believes their data is legitimate.
 
