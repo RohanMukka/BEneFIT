@@ -13,7 +13,8 @@ The BEneFIT project implements a decentralized fitness accountability system thr
 6. [Privacy & Security](#6-privacy--security)
 7. [Comparison with Other Models](#7-comparison-with-other-models)
 8. [Real-World Use Cases](#8-real-world-use-cases)
-9. [Summary](#9-summary)
+9. [Pros and Cons](#9-pros-and-cons)
+10. [Summary](#10-summary)
 ---
 ## 1. What This Model Does
 
@@ -160,7 +161,36 @@ This model offers customizable, private, and non-competitive fitness commitments
 
 ---
 
-## 9. Summary
+## 9. Pros and Cons
+
+### ✅ Advantages
+
+| Benefit                        | Description                                                                 |
+|-------------------------------|-----------------------------------------------------------------------------|
+| 🔒 **Non-Punitive**            | Users don’t lose funds to others — ETH is returned on goal success         |
+| ⚙️ **Fully Automated**         | No need for peer reviewers or centralized administrators                   |
+| 👤 **Privacy-Respecting**      | Operates using wallet addresses only — no personal identity needed         |
+| 🔗 **Trustless Enforcement**   | Smart contracts ensure outcomes without human intervention                 |
+| 📲 **API-Based Validation**    | Uses reliable data from Google Fit or Apple Health                         |
+| 🧠 **ML Fraud Detection Ready**| Can incorporate CNN models to detect fake activity patterns                |
+| 🤝 **Low Barrier to Entry**    | Users can define any goal without needing group approval                   |
+
+---
+
+### ⚠️ Limitations / Challenges
+
+| Challenge                      | Description                                                                 |
+|--------------------------------|-----------------------------------------------------------------------------|
+| 📡 **API Reliability**         | Dependence on Google Fit / Apple Health — interruptions may impact validation |
+| 🕵️ **Data Spoofing Risk**     | Fitness data can be manipulated using rooted devices or step-spoofing tools |
+| 🔁 **No Social Incentive Loop**| Lacks mutual accountability or motivation from peer group dynamics          |
+| ⏳ **Delayed Feedback**        | ETH is only unlocked at the end — no intermediate tracking or rewards       |
+| 💰 **Stake Accessibility**     | Users must be willing to lock crypto assets (ETH) to participate            |
+| 🔄 **Manual Fraud Handling**   | Requires backend or oracle verification; fraud detection not yet on-chain   |
+
+---
+
+## 10. Summary
 
 The Lock-and-Release model is a fully automated, non-punitive mechanism to promote fitness adherence through crypto incentives. By eliminating peer validators and relying on **API-based data verification**, BEneFIT ensures a seamless and fair experience that respects user privacy and provides accountability through on-chain commitments.
 

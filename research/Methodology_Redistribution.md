@@ -19,7 +19,7 @@ BEneFIT introduces a **trustless, decentralized fitness accountability platform*
 10. [🧾 Example Walkthrough](#-example-walkthrough)
 11. [🔮 Future Work](#-future-work)
 12. [⚖️ Pros and Cons](#️-12-pros-and-cons)
-13. [✅ Summary](#-summary)
+13. [✅ Summary](#13-summary)
 
 ---
 
