@@ -1,41 +1,135 @@
 # BEneFIT: A Decentralized Fitness Accountability Framework
 
+BEneFIT is a research-backed framework that leverages decentralized technologies and behavioral psychology to encourage users to stick to their fitness goals. It introduces ETH-backed staking, fraud-resistant validation, and smart contract enforcement — all while offering flexible incentive models designed to match different user preferences.
+
+---
+
+## 📄 Table of Contents
+
+- [Overview](#-overview)
+- [Project Goals](#-project-goals)
+- [Key Features](#-key-features)
+- [Improvements Introduced](#-improvements-introduced)
+- [Research Folder](#-research-folder-structure)
+- [Prototype Folder](#-prototype-folder-structure)
+- [Evaluation Summary](#-evaluation-summary)
+- [References](#-references)
+- [Authors](#-authors)
+
+---
+
 ## 🧠 Overview
 
-BEneFIT is a research initiative aimed at exploring the intersection of behavioral psychology, fitness accountability, and decentralized technologies. The objective of this project is to critically analyze existing decentralized fitness incentive platforms—such as Sweatcoin, Stepn, and GymPact—evaluate their strengths and limitations, and propose a novel framework that enhances user motivation, protects privacy, and ensures fair distribution of rewards.
+This project critically analyzes existing fitness incentive apps like **StepN** and **Sweatcoin**, identifies their weaknesses (fraud, centralization, rigid models), and proposes two ETH-staking models:
 
-This repository contains all the materials related to the research, including documentation, literature reviews, system design proposals, and implementation resources that contribute to the proposed framework.
+- **Lock-and-Release**: Solo-based. ETH is returned if the goal is achieved.
+- **Redistribution**: Group-based. ETH from failed users is redistributed to successful ones.
+
+Each model supports API-based data validation, optional ML-based fraud detection, and complete smart contract automation.
 
 ---
 
 ## 🎯 Project Goals
 
-- **Literature Review**: Investigate the structure and methodologies of both traditional and decentralized fitness platforms.
-- **Gap Analysis**: Identify key limitations in current systems, particularly in trust models, data verification processes, user incentives, and tokenomics.
-- **Framework Design**: Introduce a decentralized system that:
-  - Preserves anonymity and protects user data privacy
-  - Promotes fair and transparent reward distribution
-  - Minimizes the risk of cheating or spoofing through verifiable data inputs
-  - Encourages long-term behavior change through ethical incentive design
-- **Prototype (Optional)**: Develop a proof-of-concept dApp with a minimal smart contract and UI integration to demonstrate key mechanisms.
+- Review and critique current M2E systems and literature  
+- Design a decentralized, privacy-preserving, fraud-resistant framework  
+- Support both competitive and non-competitive fitness users  
+- (Optional) Build a working prototype with smart contracts + basic UI  
+
+---
+
+## ⚙️ Key Features
+
+- ✅ Anonymous goal setting  
+- ✅ ETH staking for accountability  
+- ✅ Verifiable health data (Google Fit / Apple Health)  
+- ✅ Peer-based validation (Redistribution model)  
+- ✅ Optional ML-based fraud detection  
+- ✅ Smart contract-based fund release or redistribution  
 
 ---
 
 ## 💡 Improvements Introduced
 
-Several enhancements were incorporated to address challenges commonly found in decentralized fitness platforms:
-
-- **Decentralization Justification**: This framework removes the reliance on a centralized authority by utilizing anonymous, verifiable goal submission and smart contract-enforced fund pooling.
-- **Trust Model for Fitness Data**: The system proposes connecting with Google Fit or Apple Health APIs while employing security measures such as timestamps, usage monitoring, or data attestation methods to mitigate tampering risks.
-- **Reward Model Refinement**: Instead of implementing a binary success/fail penalty model, the framework considers adaptive reward distribution mechanisms (e.g., partial refunds, milestones, or supporter roles) to maintain engagement while upholding accountability.
+- **True Decentralization**: No central authority managing goals or funds  
+- **Custom Goal Support**: Users define their own fitness commitments  
+- **Fairness-First**: Validators are rewarded; cheaters are penalized via logic, not opinion  
+- **Fraud Prevention**: Includes ML-based detection or oracle integration  
 
 ---
 
-## ⚙️ Key Features (Planned)
+## 📁 Research Folder Structure
 
-- Anonymous submission of user-defined fitness goals  
-- Peer-based goal approval and validation  
-- Customizable goal types beyond step counts (e.g., running duration, weekly streaks)  
-- ETH staking into smart contract-based pools  
-- Weekly/monthly data verification using mobile health tracking APIs  
-- Payout logic based on successful goal completion and fund redistribution  
+<details>
+<summary><strong>Click to expand</strong></summary>
+
+```text
+research/
+├── 01_Introduction.md
+├── 02_objective.md
+├── 03_related_work.md
+├── 04_Methodology_LockAndRelease.md
+├── 05_Methodology_Redistribution.md
+├── 06_Evaluation_Comparison.md
+├── 07_Conclusion.md
+├── 08_Future_Work.md
+├── 09_References.md
+└── Images/
+    ├── comparision.png
+    ├── Architecture.png
+    ├── Architecture_LockAndRelease.png
+    ├── workflow.png
+    ├── workflow_LockAndRelease.png
+    ├── smart_contract.png
+    └── smart_contract_LockAndRelease.png
+```
+
+</details>
+
+Each file covers a distinct research section — from literature to methodology to evaluation and future scope.
+
+---
+
+## 🧪 Prototype Folder Structure
+
+<details>
+<summary><strong>Click to expand</strong></summary>
+
+```text
+Prototype/
+├── client/              # Frontend (optional)
+├── server/              # Backend API (optional)
+├── contract_code/       # Smart contract code (Solidity)
+├── steps.js             # Basic validator/staker script
+├── package.json         # Dependencies (for Node or testing)
+```
+
+</details>
+
+Note: This prototype is optional and may contain simplified implementations for ETH staking and goal verification logic.
+
+---
+
+## 📊 Evaluation Summary
+
+Comparison of BEneFIT with existing M2E apps:
+
+![Comparison Chart](./research/Images/comparision.png)
+
+BEneFIT outperforms both Sweatcoin and StepN in transparency, flexibility, decentralization, and fairness — without relying on speculative token economies.
+
+---
+
+## 📚 References
+
+Detailed academic and app references are listed in  
+➡ [09_References.md](./research/09_References.md)
+
+---
+
+## 👥 Authors
+
+- **Kushi Reddy Kankar(kushi.reddy.kankar-1@ou.edu)**
+- **Rohan Mukka(rohan.mukka-1@ou.edu)**  
+
+---
