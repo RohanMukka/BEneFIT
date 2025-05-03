@@ -4,7 +4,17 @@
 The BEneFIT project implements a decentralized fitness accountability system through the **Lock-and-Release model**, where users lock ETH when committing to a fitness goal. Upon successful completion, verified via APIs, the ETH is released back to the user — ensuring trustless motivation with no peer competition.
 
 ---
-
+## 🧭 Table of Contents
+1. [What This Model Does](#1-what-this-model-does)
+2. [System Architecture](#2-system-architecture)
+3. [User Workflow](#3-user-workflow)
+4. [Smart Contract Architecture](#4-smart-contract-architecture)
+5. [Data Verification & Fraud Prevention](#5-data-verification--fraud-prevention)
+6. [Privacy & Security](#6-privacy--security)
+7. [Comparison with Other Models](#7-comparison-with-other-models)
+8. [Real-World Use Cases](#8-real-world-use-cases)
+9. [Summary](#9-summary)
+---
 ## 1. What This Model Does
 
 The Lock-and-Release model promotes behavior change through **self-commitment and smart contract enforcement**, instead of social comparison or redistribution.
@@ -120,6 +130,9 @@ The BEneFIT Lock-and-Release contract handles all aspects of the ETH staking lif
 - No user registration — only wallet addresses are used.
 - Fitness data is hashed or tokenized to avoid storing raw values on-chain.
 - The platform avoids third-party validators, ensuring full automation and data integrity.
+- OAuth tokens are stored off-chain and never exposed on-chain.
+- Backend can use JWT authentication to prevent unauthorized validation attempts.
+- Smart contracts are open-source and auditable.
 
 ---
 
