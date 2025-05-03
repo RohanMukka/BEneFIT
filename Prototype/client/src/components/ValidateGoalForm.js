@@ -88,21 +88,25 @@ export default function ValidateGoalForm() {
 
   async function withdrawFunds() {
     try {
+      setMessage("⏳ Withdraw in progress...");
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, BenefitABI.abi, signer);
       const tx = await contract.withdraw();
       await tx.wait();
       setMessage("✅ Withdraw successful! Check your wallet.");
-      await connectWallet(); // Refresh status after withdrawal
+      await connectWallet(); // Refresh status
     } catch (err) {
       console.error("Withdraw error:", err);
       setMessage("❌ Withdraw failed: " + (err.reason || err.message));
     }
   }
+  
 
   return (
+    
     <div style={containerStyle}>
+      
       <h2>Validate Your Goal</h2>
       <p><b>Wallet:</b> {account}</p>
 
@@ -124,14 +128,36 @@ export default function ValidateGoalForm() {
               📊 Steps walked: <b>{steps}</b><br />
               {steps >= goalData.stepGoal
                 ? "🎉 Goal reached! You can now withdraw."
-                : `🚶 You need ${goalData.stepGoal - steps} more steps.`}
+                : 🚶 You need ${goalData.stepGoal - steps} more steps.}
             </p>
           )}
-
+          
           {goalData.validated && !goalData.withdrawn && (
-            <button onClick={withdrawFunds} style={{ ...btnStyle, background: "#6366f1", marginTop: 16 }}>
-              💸 Withdraw Staked ETH
-            </button>
+  <button
+    onClick={withdrawFunds}
+    disabled={message === "⏳ Withdraw in progress..."}
+    style={{
+      ...btnStyle,
+      background: "#6366f1",
+      marginTop: 16,
+      opacity: message === "⏳ Withdraw in progress..." ? 0.7 : 1,
+      cursor: message === "⏳ Withdraw in progress..." ? "not-allowed" : "pointer"
+    }}
+  >
+    {message === "✅ Withdraw successful! Check your wallet." 
+      ? "✅ Withdraw Successful" 
+      : message === "⏳ Withdraw in progress..." 
+        ? "⏳ Withdraw in Progress..."
+        : "💸 Withdraw Staked ETH"}
+  </button>
+)}
+
+
+
+          {goalData.withdrawn && (
+            <p style={{ ...btnStyle, background: "#6366f1", marginTop: 16 }}>
+              Funds have been withdrawn.Check your wallet.
+            </p>
           )}
         </>
       )}
@@ -142,21 +168,84 @@ export default function ValidateGoalForm() {
 }
 
 // Styling
+const navWrapperStyle = {
+  width: "100%",
+  position: "relative",
+  top: 0,
+  left: 0,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  background: "#f9fafb"
+};
+
+const navbarStyle = {
+  width: "100%",
+  maxWidth: "1280px",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "1rem 2rem",
+  background: "#ffffff10",
+  backdropFilter: "blur(20px)",
+  border: "1px solid rgba(255, 255, 255, 0.1)",
+  borderRadius: "20px",
+  margin: "1.25rem auto",
+  boxShadow: "0 12px 32px rgba(0,0,0,0.1)",
+  position: "sticky",
+  top: "1rem",
+  zIndex: 1000
+};
+
 const containerStyle = {
-  maxWidth: 440,
-  margin: "100px auto",
-  padding: 24,
-  borderRadius: 16,
-  boxShadow: "0 2px 12px #0001",
-  background: "#fff"
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "radial-gradient(circle at top left, #f3e8ff, #e0f2fe)",
+  padding: "2rem",
+  fontFamily: "'Segoe UI', Tahoma, sans-serif",
+  color: "#111827"
+};
+
+const titleStyle = {
+  fontSize: "2.3rem",
+  fontWeight: "bold",
+  marginBottom: "0.5rem",
+  textAlign: "center",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center"
+};
+
+const descStyle = {
+  fontSize: "1.1rem",
+  color: "#4b5563",
+  marginBottom: "1.5rem",
+  textAlign: "center"
+};
+
+const infoCard = {
+  background: "#f9fafb",
+  padding: "1rem",
+  borderRadius: "10px",
+  marginBottom: "1rem",
+  width: "100%",
+  maxWidth: "400px",
+  boxShadow: "inset 0 1px 4px rgba(0,0,0,0.05)",
+  fontSize: "0.95rem"
 };
 
 const btnStyle = {
-  marginTop: 18,
   width: "100%",
-  padding: 12,
+  marginTop: "1.5rem",
+  padding: "1rem",
+  fontSize: "1rem",
   color: "#fff",
   border: "none",
-  borderRadius: 8,
-  cursor: "pointer"
+  borderRadius: "10px",
+  fontWeight: "600",
+  cursor: "pointer",
+  boxShadow: "0 6px 14px rgba(0,0,0,0.1)"
 };
