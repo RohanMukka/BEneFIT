@@ -18,7 +18,8 @@ BEneFIT introduces a **trustless, decentralized fitness accountability platform*
 9. [📚 Lessons from Real-World dApps](#-lessons-from-real-world-dapps)
 10. [🧾 Example Walkthrough](#-example-walkthrough)
 11. [🔮 Future Work](#-future-work)
-12. [✅ Summary](#-summary)
+12. [⚖️ Pros and Cons](#️-12-pros-and-cons)
+13. [✅ Summary](#-summary)
 
 ---
 
@@ -195,7 +196,27 @@ BEneFIT’s process ensures accountability through community governance and cryp
 
 ---
 
-## ✅ Summary
+## ⚖️ 12. Pros and Cons
+
+### ✅ Pros
+
+- **Decentralized Trust**: No central authority is required for validation or fund management; everything is governed by smart contracts and peer votes.
+- **Financial Commitment Boosts Motivation**: Staking real ETH increases user accountability and reduces false sign-ups.
+- **Fraud Resistance**: Combines API-based data sync, machine learning detection, and human validators to catch cheating or spoofing attempts.
+- **Privacy Preserving**: Fitness data is hashed before submission; personal details are never exposed on-chain.
+- **Modular & Extensible**: Each system layer (frontend, backend, smart contract, validation logic) can evolve independently.
+
+### ❌ Cons
+
+- **Validator Collusion Risk**: In small pools, there's a theoretical risk of peer validators colluding to approve fake submissions.
+- **User Onboarding Complexity**: Requires basic Web3 literacy, ETH wallet setup, and API access permissions which may deter non-technical users.
+- **Mobile Data Integrity Is Assumed**: Relies heavily on external APIs (Google Fit, Apple Health), which may be vulnerable to spoofing or device tampering.
+- **Punitive Perception**: Redistribution of failed user stakes might be viewed negatively if users feel unfairly penalized.
+- **Gas Fees on Ethereum**: Transaction costs may become a barrier unless moved to a Layer 2 network in the future.
+
+---
+
+## 13 Summary
 
 BEneFIT offers a transparent, decentralized alternative to gamified fitness platforms by **rewarding real commitment** and **penalizing dishonesty**, all while preserving privacy and trust via cryptography and smart contracts.
 
