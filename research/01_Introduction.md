@@ -29,11 +29,3 @@ A study on Sweatcoin [2] showed that even small incentives helped users, especia
 Even more interesting is a recent experiment by Spika et al. [3], where gym-goers in Sweden were offered contracts to commit to their workout plans — and they had to stake their own money. Those who accepted contracts with real financial penalties ended up going to the gym **21% more often**. That’s a strong sign that when people put money on the line, they’re more likely to follow through — especially if it’s their own cash. BEneFIT builds on that exact idea, but adds automation and decentralization through smart contracts.
 
 </div>
-
-### References
-
-[1] Lee S. *Real Steps or Not: Auto-Walker Detection in Move-to-Earn Applications*. Sensors (Basel). 2025 Feb 7;25(4):1002. https://doi.org/10.3390/s25041002. PMID: 40006230; PMCID: PMC11860139.  
-
-[2] Elliott M, Eck F, Khmelev E, Derlyatka A, Fomenko O. *Physical Activity Behavior Change Driven by Engagement With an Incentive-Based App: Evaluating the Impact of Sweatcoin*. JMIR Mhealth Uhealth. 2019;7(7):e12445. https://doi.org/10.2196/12445. PMID: 31287064; PMCID: PMC6643767.  
-
-[3] Spika D, Wickström Östervall L, Gerdtham U, Wengström E. *Put a bet on it: Can self-funded commitment contracts curb fitness procrastination?* J Health Econ. 2024 Dec;98:102943. https://doi.org/10.1016/j.jhealeco.2024.102943. Epub 2024 Nov 12. PMID: 39571470.
