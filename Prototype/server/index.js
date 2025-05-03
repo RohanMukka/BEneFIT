@@ -14,117 +14,115 @@ app.use(express.json());
 // Smart contract config
 const CONTRACT_ADDRESS = "0x074dE1686d2D81690FBabdf7F5336e58AC1Cd46c";
 const ABI = require("../client/src/abi/BenefitLockAndReleaseNoDeadline.json").abi;
-const provider = new ethers.JsonRpcProvider(process.env.RPC_URL || "https://sepolia.infura.io/v3/834123c9cebf4ca197b5904ab5caec91");
+const provider = new ethers.JsonRpcProvider(process.env.RPC_URL || "https://sepolia.infura.io/v3/YOUR_INFURA_KEY");
 const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
+
+// In-memory token storage
+const tokenStorage = new Map();
 
 // Health check
 app.get("/", (req, res) => {
   res.send("✅ Server is alive!");
 });
 
-// ✅ Validate steps with Google Fit
+// OAuth callback route to exchange code for tokens
+app.get("/oauth-callback", async (req, res) => {
+  const { code, state } = req.query;
+  const redirect_uri = "http://localhost:5050/oauth-callback";
+
+  try {
+    const response = await axios.post("https://oauth2.googleapis.com/token", {
+      code,
+      client_id: process.env.GOOGLE_CLIENT_ID,
+      client_secret: process.env.GOOGLE_CLIENT_SECRET,
+      redirect_uri,
+      grant_type: "authorization_code",
+    });
+
+    const accessToken = response.data.access_token;
+
+    // Save token in memory mapped to user wallet (from `state`)
+    tokenStorage.set(state, { access_token: accessToken });
+
+    // 🔁 Redirect back to frontend cleanly (no token in URL)
+    res.redirect(`http://localhost:3000/validate?user=${state}`);
+  } catch (error) {
+    console.error("OAuth callback error", error.response?.data || error.message);
+    res.status(500).send("OAuth failed");
+  }
+});
+
+
+
+// Validate steps using saved token
 app.post("/api/validate-steps", async (req, res) => {
   try {
-    const { accessToken, userAddress } = req.body;
-    if (!accessToken || !userAddress) {
-      return res.status(400).json({ error: "Missing accessToken or userAddress" });
-    }
+    const { userAddress } = req.body;
+    const tokenInfo = tokenStorage.get(userAddress);
 
-    console.log("🔍 Validating steps for:", userAddress);
+    if (!tokenInfo) return res.status(400).json({ error: "User not authorized" });
 
     const goal = await contract.getGoalStatus(userAddress);
     const startTimeMillis = Number(goal[1]) * 1000;
     const stepGoal = Number(goal[2]);
-
-    if (stepGoal === 0) {
-      return res.status(404).json({
-        success: false,
-        steps: 0,
-        message: "⚠️ No step goal found for this user."
-      });
-    }
-
     const endTimeMillis = Date.now();
-    const url = "https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate";
-    const data = {
+
+    const response = await axios.post("https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate", {
       aggregateBy: [{ dataTypeName: "com.google.step_count.delta" }],
       bucketByTime: { durationMillis: endTimeMillis - startTimeMillis },
       startTimeMillis,
       endTimeMillis
-    };
-
-    const response = await axios.post(url, data, {
+    }, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${tokenInfo.access_token}`,
         "Content-Type": "application/json"
       }
     });
 
     let totalSteps = 0;
-    const buckets = response.data.bucket;
-    if (buckets?.length > 0) {
-      for (const bucket of buckets) {
-        const dataset = bucket.dataset[0];
-        if (dataset?.point?.length > 0) {
-          for (const point of dataset.point) {
-            totalSteps += point.value[0].intVal || 0;
-          }
+    const buckets = response.data.bucket || [];
+    for (const bucket of buckets) {
+      const dataset = bucket.dataset[0];
+      if (dataset?.point?.length > 0) {
+        for (const point of dataset.point) {
+          totalSteps += point.value[0].intVal || 0;
         }
       }
     }
 
-    // Response based on steps walked
     if (totalSteps >= stepGoal) {
-      return res.json({
-        success: true,
-        steps: totalSteps,
-        message: `✅ Hurray! You've walked ${totalSteps} steps. Goal reached!`
-      });
+      return res.json({ success: true, steps: totalSteps, message: "✅ Goal reached!" });
     } else {
-      return res.json({
-        success: false,
-        steps: totalSteps,
-        message: `❌ Goal not reached. You still need ${stepGoal - totalSteps} steps.`
-      });
+      return res.json({ success: false, steps: totalSteps, message: `❌ Need ${stepGoal - totalSteps} more steps.` });
     }
   } catch (err) {
-    console.error("❌ Google Fit API error:", err.response?.data || err.message);
-    res.status(500).json({ error: "Failed to validate steps from Google Fit" });
+    console.error("❌ Step validation error:", err.response?.data || err.message);
+    res.status(500).json({ error: "Failed to validate steps" });
   }
 });
 
-// ✅ On-chain goal validation — called by backend owner/oracle
+// On-chain validation from backend oracle
 app.post("/api/validate-onchain", async (req, res) => {
   const { userAddress } = req.body;
-
-  if (!userAddress) {
-    return res.status(400).json({ message: "Missing userAddress" });
-  }
+  if (!userAddress) return res.status(400).json({ message: "Missing userAddress" });
 
   try {
-    const signer = new ethers.Wallet('839673eeed81fcce11b6e5ad467accde99582ea941d5eb64a610610ae40fc49a', provider);
+    const signer = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
     const contractWithSigner = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
 
     const tx = await contractWithSigner.validateGoal(userAddress);
     await tx.wait();
-
-    console.log(`✅ Goal validated on-chain for ${userAddress}`);
     res.status(200).json({ message: "✅ Goal validated on-chain!" });
   } catch (err) {
     console.error("❌ On-chain validation error:", err);
-    res.status(500).json({ message: "❌ Failed to validate on-chain", error: err.message });
+    res.status(500).json({ message: "❌ On-chain validation failed", error: err.message });
   }
 });
 
-// Server listen
+// Start server
 app.listen(PORT, () => {
-  console.log(`✅ Backend server running on http://localhost:${PORT}`);
+  console.log(`✅ Backend running at http://localhost:${PORT}`);
 });
 
-// Optional: catch unexpected errors
-process.on("uncaughtException", (err) => {
-  console.error("❌ Uncaught Exception:", err);
-});
-process.on("unhandledRejection", (err) => {
-  console.error("❌ Unhandled Rejection:", err);
-});
+
+
