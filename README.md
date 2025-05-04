@@ -14,6 +14,7 @@ BEneFIT is a research-backed framework that leverages decentralized technologies
 - [Prototype Folder](#-prototype-folder-structure)
 - [Evaluation Summary](#-evaluation-summary)
 - [References](#-references)
+- [Demo Video](#-demo-video)
 - [Authors](#-authors)
 
 ---
@@ -123,6 +124,13 @@ BEneFIT outperforms both Sweatcoin and StepN in transparency, flexibility, decen
 
 Detailed academic and app references are listed in  
 ➡ [09_References.md](./research/09_References.md)
+
+---
+
+## 🎥 Demo Video
+
+A demonstration video showcasing the BEneFIT framework, its prototype, and the ETH-staking models is available here:  
+➡ [Watch the Video](https://drive.google.com/file/d/1I-f484pqer2Paw60Z03FmnWv41pmMrX1/view?usp=drive_link)
 
 ---
 
