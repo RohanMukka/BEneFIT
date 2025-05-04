@@ -72,8 +72,7 @@ research/
 ├── 05_Methodology_Redistribution.md
 ├── 06_Evaluation_Comparison.md
 ├── 07_Conclusion.md
-├── 08_Future_Work.md
-├── 09_References.md
+├── 08_References.md
 └── Images/
     ├── comparision.png
     ├── Architecture.png
