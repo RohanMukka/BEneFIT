@@ -17,9 +17,8 @@ BEneFIT introduces a **trustless, decentralized fitness accountability platform*
 8. [🔄 Trust Assumptions](#-trust-assumptions)
 9. [📚 Lessons from Real-World dApps](#-lessons-from-real-world-dapps)
 10. [🧾 Example Walkthrough](#-example-walkthrough)
-11. [🔮 Future Work](#-future-work)
-12. [⚖️ Pros and Cons](#️-12-pros-and-cons)
-13. [✅ Summary](#13-summary)
+11. [⚖️ Pros and Cons](#️-11-pros-and-cons)
+12. [✅ Summary](#12-summary)
 
 ---
 
@@ -186,17 +185,7 @@ BEneFIT’s process ensures accountability through community governance and cryp
 
 ---
 
-## 🔮 11. Future Work
-
-- 🛡️ Zero-Knowledge Proofs for data submission
-- 🔗 Chainlink Functions for secure oracle data feeds
-- ⭐ Validator Reputation Scores for better voting reliability
-- 📱 Cross-platform mobile dApp with push alerts and gamified UI
-- 🧩 Integrating collaborative/group goals and community challenges
-
----
-
-## ⚖️ 12. Pros and Cons
+## ⚖️ 11. Pros and Cons
 
 ### ✅ Pros
 
@@ -216,7 +205,7 @@ BEneFIT’s process ensures accountability through community governance and cryp
 
 ---
 
-## 13 Summary
+## 12 Summary
 
 BEneFIT offers a transparent, decentralized alternative to gamified fitness platforms by **rewarding real commitment** and **penalizing dishonesty**, all while preserving privacy and trust via cryptography and smart contracts.
 
