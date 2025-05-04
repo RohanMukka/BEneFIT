@@ -130,7 +130,7 @@ Detailed academic and app references are listed in
 ## 🎥 Demo Video
 
 A demonstration video showcasing the BEneFIT framework, its prototype, and the ETH-staking models is available here:  
-➡ [Watch the Video](https://drive.google.com/file/d/1I-f484pqer2Paw60Z03FmnWv41pmMrX1/view?usp=drive_link)
+➡ [Watch the Video](https://drive.google.com/file/d/1Q9owTK-uGbansKn5WoXiDxKAsk3fv_6N/view?usp=sharing)
 
 ---
 
