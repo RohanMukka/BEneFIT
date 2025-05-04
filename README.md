@@ -100,7 +100,6 @@ Prototype/
 ├── client/              # Frontend (optional)
 ├── server/              # Backend API (optional)
 ├── contract_code/       # Smart contract code (Solidity)
-├── steps.js             # Basic validator/staker script
 ├── package.json         # Dependencies (for Node or testing)
 ```
 
