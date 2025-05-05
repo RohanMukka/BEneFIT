@@ -141,7 +141,7 @@ Note: This prototype is optional and may contain simplified implementations for 
 
 Comparison of BEneFIT with existing M2E apps:
 
-![Comparison Chart](./research/Images/comparision.png)
+![Comparison Chart](./research/Images/comparisionTable.png)
 
 BEneFIT outperforms both Sweatcoin and StepN in transparency, flexibility, decentralization, and fairness — without relying on speculative token economies.
 
