@@ -130,7 +130,7 @@ BEneFIT/
     │   └── README.md
     ├── .gitignore                      # Git ignored files list (node_modules, .env, etc.)
     └── README.md                       # About Prototype
-
+```
 </details>
 
 Note: This prototype is optional and may contain simplified implementations for ETH staking and goal verification logic.
