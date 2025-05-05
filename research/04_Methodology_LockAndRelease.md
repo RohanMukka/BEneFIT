@@ -33,7 +33,6 @@ The Lock-and-Release model promotes behavior change through **self-commitment an
 
 3. **Data Validation**
    - At the end of the challenge, the backend verifies if the goal was met.
-   - Optionally, an ML model (e.g., CNN) checks for fraud-like fake movement.
 
 4. **ETH Release**
    - If validated, the smart contract **automatically releases** the staked ETH back to the user.
@@ -43,7 +42,7 @@ The Lock-and-Release model promotes behavior change through **self-commitment an
 
 ## 2. System Architecture
 
-The system is modular and streamlined to support fully automated, validator-free operation using fitness APIs and optional ML fraud detection.
+The system is modular and streamlined to support fully automated, validator-free operation using fitness APIs.
 
 **Figure 1: System Architecture**
 
@@ -58,7 +57,7 @@ The system is modular and streamlined to support fully automated, validator-free
   - Fitness data is pulled directly from **Google Fit** or **Apple Health** APIs, ensuring reliability.
 
 - **Backend/Middleware:**  
-  - Normalizes API data, verifies completion conditions, and optionally runs an ML fraud-detection engine.
+  - Normalizes API data, verifies completion conditions.
 
 - **Blockchain Layer:**  
   - Smart contracts manage ETH staking, time-bound goals, and automated refund triggers.
@@ -83,7 +82,6 @@ The Lock-and-Release process is straightforward, ensuring trustless behavior thr
 ### ➤ Activity Monitoring
 - Fitness data is fetched via APIs (Google Fit / Apple Health).
 - Data is regularly synced or submitted manually via API tokens.
-- Optionally, the backend checks for anomalies using ML (e.g., CNN models trained to detect fake walking).
 
 ### ➤ Goal Completion & ETH Release
 - The backend compares recorded data against the goal.
@@ -144,7 +142,7 @@ The BEneFIT Lock-and-Release contract handles all aspects of the ETH staking lif
 | Validators Required        | ❌ None                | ✅ Peer-based voting       | ❌ Centralized judgment   |
 | ETH Loss on Failure        | ❌ No                  | ✅ Yes (redistributed)     | ❌ No stakes involved     |
 | Privacy                    | ✅ Wallet-only         | ⚠️ Peer visibility         | ❌ Full identity required |
-| Data Verification          | ✅ API + Optional ML   | ✅ API + Voting            | ❌ Often manual           |
+| Data Verification          | ✅ API           | ✅ API + Voting            | ❌ Often manual           |
 | Smart Contract Enforcement | ✅ Yes                 | ✅ Yes                     | ❌ No                     |
 | Ideal Use Case             | Solo Challenges        | Group Competitions        | General Use               |
 
@@ -171,8 +169,7 @@ This model offers customizable, private, and non-competitive fitness commitments
 | ⚙️ **Fully Automated**         | No need for peer reviewers or centralized administrators                   |
 | 👤 **Privacy-Respecting**      | Operates using wallet addresses only — no personal identity needed         |
 | 🔗 **Trustless Enforcement**   | Smart contracts ensure outcomes without human intervention                 |
-| 📲 **API-Based Validation**    | Uses reliable data from Google Fit or Apple Health                         |
-| 🧠 **ML Fraud Detection Ready**| Can incorporate CNN models to detect fake activity patterns                |
+| 📲 **API-Based Validation**    | Uses reliable data from Google Fit or Apple                 |
 | 🤝 **Low Barrier to Entry**    | Users can define any goal without needing group approval                   |
 
 ---
