@@ -96,12 +96,40 @@ Each file covers a distinct research section — from literature to methodology 
 <summary><strong>Click to expand</strong></summary>
 
 ```text
-Prototype/
-├── client/              # Frontend (optional)
-├── server/              # Backend API (optional)
-├── contract_code/       # Smart contract code (Solidity)
-├── package.json         # Dependencies (for Node or testing)
-```
+BEneFIT/
+└── Prototype/                            # Main project directory
+    ├── client/                          # Frontend React application
+    │   ├── public/                      # Static files (HTML, icons, etc.)
+    │   └── src/
+    │       ├── abi/                    # ABI definitions for smart contract interaction
+    │       ├── components/            # Core React components for the dApp
+    │       │   ├── BenefitStakeForm.js     # Form for staking ETH toward fitness goal
+    │       │   ├── ChoicePage.js           # UI page to choose between staking or validating
+    │       │   └── ValidateGoalForm.js     # Form to validate fitness goals after completion
+    │       ├── App.css                 # Global CSS styles
+    │       ├── App.js                  # Root component
+    │       └── index.js                # Entry point for React DOM rendering
+    │   ├── package.json                # Frontend dependencies and scripts
+    │   └── package-lock.json
+    ├── contract_code/                  # Hardhat-based Ethereum smart contract workspace
+    │   ├── artifacts/                  # Auto-generated contract build artifacts (ignored)
+    │   ├── cache/                      # Hardhat cache (ignored)
+    │   ├── contracts/                  # Solidity contracts
+    │   │   ├── BenefitLockAndReleaseNoDeadline.sol   # Lock-and-release staking logic
+    │   │   └── BenefitRedistributionZKP.sol          # Redistribution staking logic
+    │   ├── ignition/                   # Hardhat Ignition scripts (deployment configs)
+    │   ├── scripts/                    # Custom deployment or test scripts
+    │   ├── .env                        # Hardhat environment configuration
+    │   ├── hardhat.config.js           # Hardhat configuration file
+    │   ├── package.json                # Smart contract dependencies and tasks
+    │   └── README.md
+    ├── server/                         # Node.js backend (e.g. for OAuth or Chainlink calls)
+    │   ├── .env                        # Backend environment config (Google Fit, API keys)
+    │   ├── index.js                    # Express server entry point
+    │   ├── package.json
+    │   └── README.md
+    ├── .gitignore                      # Git ignored files list (node_modules, .env, etc.)
+    └── README.md                       # About Prototype
 
 </details>
 
