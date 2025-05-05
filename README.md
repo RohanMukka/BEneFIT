@@ -14,6 +14,7 @@ BEneFIT is a research-backed framework that leverages decentralized technologies
 - [Prototype Folder](#-prototype-folder-structure)
 - [Evaluation Summary](#-evaluation-summary)
 - [References](#-references)
+- [Demo Video](#-demo-video)
 - [Authors](#-authors)
 
 ---
@@ -72,8 +73,7 @@ research/
 ├── 05_Methodology_Redistribution.md
 ├── 06_Evaluation_Comparison.md
 ├── 07_Conclusion.md
-├── 08_Future_Work.md
-├── 09_References.md
+├── 08_References.md
 └── Images/
     ├── comparision.png
     ├── Architecture.png
@@ -96,14 +96,41 @@ Each file covers a distinct research section — from literature to methodology 
 <summary><strong>Click to expand</strong></summary>
 
 ```text
-Prototype/
-├── client/              # Frontend (optional)
-├── server/              # Backend API (optional)
-├── contract_code/       # Smart contract code (Solidity)
-├── steps.js             # Basic validator/staker script
-├── package.json         # Dependencies (for Node or testing)
+BEneFIT/
+└── Prototype/                            # Main project directory
+    ├── client/                          # Frontend React application
+    │   ├── public/                      # Static files (HTML, icons, etc.)
+    │   └── src/
+    │       ├── abi/                    # ABI definitions for smart contract interaction
+    │       ├── components/            # Core React components for the dApp
+    │       │   ├── BenefitStakeForm.js     # Form for staking ETH toward fitness goal
+    │       │   ├── ChoicePage.js           # UI page to choose between staking or validating
+    │       │   └── ValidateGoalForm.js     # Form to validate fitness goals after completion
+    │       ├── App.css                 # Global CSS styles
+    │       ├── App.js                  # Root component
+    │       └── index.js                # Entry point for React DOM rendering
+    │   ├── package.json                # Frontend dependencies and scripts
+    │   └── package-lock.json
+    ├── contract_code/                  # Hardhat-based Ethereum smart contract workspace
+    │   ├── artifacts/                  # Auto-generated contract build artifacts (ignored)
+    │   ├── cache/                      # Hardhat cache (ignored)
+    │   ├── contracts/                  # Solidity contracts
+    │   │   ├── BenefitLockAndReleaseNoDeadline.sol   # Lock-and-release staking logic
+    │   │   └── BenefitRedistributionZKP.sol          # Redistribution staking logic
+    │   ├── ignition/                   # Hardhat Ignition scripts (deployment configs)
+    │   ├── scripts/                    # Custom deployment or test scripts
+    │   ├── .env                        # Hardhat environment configuration
+    │   ├── hardhat.config.js           # Hardhat configuration file
+    │   ├── package.json                # Smart contract dependencies and tasks
+    │   └── README.md
+    ├── server/                         # Node.js backend (e.g. for OAuth or Chainlink calls)
+    │   ├── .env                        # Backend environment config (Google Fit, API keys)
+    │   ├── index.js                    # Express server entry point
+    │   ├── package.json
+    │   └── README.md
+    ├── .gitignore                      # Git ignored files list (node_modules, .env, etc.)
+    └── README.md                       # About Prototype
 ```
-
 </details>
 
 Note: This prototype is optional and may contain simplified implementations for ETH staking and goal verification logic.
@@ -124,6 +151,13 @@ BEneFIT outperforms both Sweatcoin and StepN in transparency, flexibility, decen
 
 Detailed academic and app references are listed in  
 ➡ [09_References.md](./research/09_References.md)
+
+---
+
+## 🎥 Demo Video
+
+A demonstration video showcasing the BEneFIT framework, its prototype, and the ETH-staking models is available here:  
+➡ [Watch the Video](https://drive.google.com/file/d/1Q9owTK-uGbansKn5WoXiDxKAsk3fv_6N/view?usp=sharing)
 
 ---
 

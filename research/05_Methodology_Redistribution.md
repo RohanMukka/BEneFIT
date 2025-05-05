@@ -17,9 +17,8 @@ BEneFIT introduces a **trustless, decentralized fitness accountability platform*
 8. [🔄 Trust Assumptions](#-trust-assumptions)
 9. [📚 Lessons from Real-World dApps](#-lessons-from-real-world-dapps)
 10. [🧾 Example Walkthrough](#-example-walkthrough)
-11. [🔮 Future Work](#-future-work)
-12. [⚖️ Pros and Cons](#️-12-pros-and-cons)
-13. [✅ Summary](#13-summary)
+11. [⚖️ Pros and Cons](#️-11-pros-and-cons)
+12. [✅ Summary](#12-summary)
 
 ---
 
@@ -85,7 +84,7 @@ The **BEneFIT Redistribution Model** creates a self-governing ecosystem where us
 BEneFIT is structured into five functional layers to ensure modularity, scalability, and minimal trust assumptions:
 
 <div align="center">
-<img src="./Images/Architecture.png" alt="BEneFIT System Architecture" width="80%">
+<img src="./Images/Architecture_Redistribution.png" alt="BEneFIT System Architecture" width="80%">
 </div>
 
 - **User Interface Layer**: dApp for users to set goals, stake ETH, and view progress.
@@ -101,7 +100,7 @@ BEneFIT is structured into five functional layers to ensure modularity, scalabil
 BEneFIT’s process ensures accountability through community governance and cryptographic verification.
 
 <div align="center">
-<img src="./Images/workflow.png" alt="BEneFIT User Workflow" width="60%">
+<img src="./Images/workflow_Redistribution.png" alt="BEneFIT User Workflow" width="60%">
 </div>
 
 ### 🟢 4.1 Group Approval
@@ -124,7 +123,7 @@ BEneFIT’s process ensures accountability through community governance and cryp
 ## 🔐 5. Smart Contract Architecture
 
 <div align="center">
-<img src="./Images/smart_contract.png" alt="Smart Contract Design" width="100%">
+<img src="./Images/smart_contract_Redistribution.png" alt="Smart Contract Design" width="100%">
 </div>
 
 ### Key Modules
@@ -186,17 +185,7 @@ BEneFIT’s process ensures accountability through community governance and cryp
 
 ---
 
-## 🔮 11. Future Work
-
-- 🛡️ Zero-Knowledge Proofs for data submission
-- 🔗 Chainlink Functions for secure oracle data feeds
-- ⭐ Validator Reputation Scores for better voting reliability
-- 📱 Cross-platform mobile dApp with push alerts and gamified UI
-- 🧩 Integrating collaborative/group goals and community challenges
-
----
-
-## ⚖️ 12. Pros and Cons
+## ⚖️ 11. Pros and Cons
 
 ### ✅ Pros
 
@@ -216,7 +205,7 @@ BEneFIT’s process ensures accountability through community governance and cryp
 
 ---
 
-## 13 Summary
+## 12 Summary
 
 BEneFIT offers a transparent, decentralized alternative to gamified fitness platforms by **rewarding real commitment** and **penalizing dishonesty**, all while preserving privacy and trust via cryptography and smart contracts.
 
