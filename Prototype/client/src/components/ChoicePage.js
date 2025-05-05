@@ -1,11 +1,11 @@
-// Importing required dependencies and assets
-import "../App.css"; // Importing global CSS styles
-import React from "react"; // Importing React for component creation
-import { Link } from "react-router-dom"; // Importing Link for navigation between routes
-import { motion } from "framer-motion"; // Importing motion for animations
-import { FaWalking, FaRocket } from "react-icons/fa"; // Importing icons for UI enhancement
+// ChoicePage.js (with animation and icons)
+import '../App.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaWalking, FaRocket } from "react-icons/fa";
+require("dotenv").config();
 
-// Main component for the Choice Page
 export default function ChoicePage() {
   return (
     <motion.div

@@ -1,14 +1,13 @@
-// Importing required dependencies
-import React, { useEffect, useState } from "react"; // React hooks for state and lifecycle management
-import { ethers } from "ethers"; // Ethers.js for interacting with the Ethereum blockchain
-import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json"; // ABI for the Benefit smart contract
+// ValidateGoalForm.js
+import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
 
-// Constants for the smart contract and Google OAuth
-const CONTRACT_ADDRESS = "0x074dE1686d2D81690FBabdf7F5336e58AC1Cd46c"; // Address of the deployed smart contract
-const GOOGLE_CLIENT_ID = "1041077142375-eedsjqmdmqebildqbb97gq3iki5g8nkj.apps.googleusercontent.com"; // Google OAuth client ID
-const REDIRECT_URI = "http://localhost:5050/oauth-callback"; // Redirect URI for Google OAuth
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const REDIRECT_URI = "http://localhost:5050/oauth-callback";
+require("dotenv").config();
 
-// Main component for validating fitness goals
 export default function ValidateGoalForm() {
   // State variables for managing user data and UI state
   const [account, setAccount] = useState(""); // User's wallet address
