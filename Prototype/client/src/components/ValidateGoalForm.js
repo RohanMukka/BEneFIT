@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
 
-const CONTRACT_ADDRESS = "0x074dE1686d2D81690FBabdf7F5336e58AC1Cd46c";
-const GOOGLE_CLIENT_ID = "1041077142375-eedsjqmdmqebildqbb97gq3iki5g8nkj.apps.googleusercontent.com";
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const REDIRECT_URI = "http://localhost:5050/oauth-callback";
+require("dotenv").config();
 
 export default function ValidateGoalForm() {
   const [account, setAccount] = useState("");

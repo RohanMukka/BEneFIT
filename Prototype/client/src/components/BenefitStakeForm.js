@@ -5,8 +5,9 @@ import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
 import { motion } from "framer-motion";
 import toast, { Toaster } from 'react-hot-toast';
 import { FaEthereum, FaBullseye, FaLock } from "react-icons/fa";
+require("dotenv").config();
 
-const CONTRACT_ADDRESS = "0x074dE1686d2D81690FBabdf7F5336e58AC1Cd46c";
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS
 
 function getNetworkName(chainId) {
   switch (chainId) {
