@@ -5,7 +5,10 @@ const { ethers } = require("ethers");
 require("dotenv").config();
 
 const app = express();
-const PORT = 5050;
+const PORT = process.env.PORT || 5050;
+// Base URLs are configurable so the backend can run locally or on Vercel.
+const SERVER_URL = process.env.SERVER_URL || `http://localhost:${PORT}`;
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 // Middleware
 app.use(cors());
@@ -28,7 +31,7 @@ app.get("/", (req, res) => {
 // OAuth callback route to exchange code for tokens
 app.get("/oauth-callback", async (req, res) => {
   const { code, state } = req.query;
-  const redirect_uri = "http://localhost:5050/oauth-callback";
+  const redirect_uri = `${SERVER_URL}/oauth-callback`;
 
   try {
     const response = await axios.post("https://oauth2.googleapis.com/token", {
@@ -45,7 +48,7 @@ app.get("/oauth-callback", async (req, res) => {
     tokenStorage.set(state, { access_token: accessToken });
 
     // 🔁 Redirect back to frontend cleanly (no token in URL)
-    res.redirect(`http://localhost:3000/validate?user=${state}`);
+    res.redirect(`${FRONTEND_URL}/validate?user=${state}`);
   } catch (error) {
     console.error("OAuth callback error", error.response?.data || error.message);
     res.status(500).send("OAuth failed");
@@ -121,7 +124,7 @@ app.post("/api/validate-onchain", async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`✅ Backend running at http://localhost:${PORT}`);
+  console.log(`✅ Backend running at ${SERVER_URL}`);
 });
 
 

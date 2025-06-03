@@ -3,10 +3,15 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
 
-const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const REDIRECT_URI = "http://localhost:5050/oauth-callback";
-require("dotenv").config();
+// Contract and OAuth credentials are supplied via environment variables with
+// the REACT_APP_ prefix to ensure they are embedded during the build step.
+const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
+// The backend base URL is configurable so that the app can point to a Vercel
+// serverless function or a local server during development.
+const API_BASE_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5050";
+const REDIRECT_URI = `${API_BASE_URL}/oauth-callback`;
 
 export default function ValidateGoalForm() {
   // State variables for managing user data and UI state

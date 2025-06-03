@@ -57,3 +57,22 @@ That's it!
 
 ✅ Now you are ready to interact with your decentralized fitness app!
 
+---
+
+## 🚢 Deploying the React Client to Vercel
+
+1. **Build the frontend**
+   ```bash
+   cd client
+   npm install
+   npm run build
+   ```
+2. **Create a new Vercel project** and set the project root to `Prototype/client` if importing from Git.
+3. **Add environment variables** in the Vercel dashboard:
+   - `REACT_APP_CONTRACT_ADDRESS` – address of the deployed contract
+   - `REACT_APP_GOOGLE_CLIENT_ID` – OAuth client ID for Google Fit
+   - `REACT_APP_SERVER_URL` – URL of the backend (e.g. `https://your-api.vercel.app`)
+4. **Deploy**. Vercel will serve the static React build.
+
+If you also deploy the backend (e.g., as a separate service), configure `SERVER_URL` and `FRONTEND_URL` there so OAuth redirects work correctly.
+

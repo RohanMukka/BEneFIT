@@ -6,9 +6,11 @@ import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEthereum, FaBullseye, FaLock } from "react-icons/fa";
-require("dotenv").config();
 
-const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS
+// Environment variables are injected at build time in Create React App when
+// they are prefixed with REACT_APP_. This allows the Vercel deployment to
+// provide values via project settings.
+const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 
 // Utility function to get the network name based on chain ID
 function getNetworkName(chainId) {
