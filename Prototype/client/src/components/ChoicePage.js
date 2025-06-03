@@ -4,7 +4,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaWalking, FaRocket } from "react-icons/fa";
-require("dotenv").config();
 
 export default function ChoicePage() {
   return (

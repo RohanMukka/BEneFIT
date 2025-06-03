@@ -65,7 +65,7 @@ This section evaluates the two incentive models implemented in BEneFIT — **Loc
 The figure below provides a side-by-side comparison of all platforms across core features:
 
 <div align="center">
-  <img src="./Images/comparisionTable.png" alt="BEneFIT Evaluation Summary" width="95%">
+  <img src="./Images/comparisonTable.png" alt="BEneFIT Evaluation Summary" width="95%">
 </div>
 
 ---
