@@ -167,6 +167,12 @@ A demonstration video showcasing the BEneFIT framework, its prototype, and the E
 ## 👥 Authors
 
 - **Kushi Reddy Kankar(kushi.reddy.kankar-1@ou.edu)**
-- **Rohan Mukka(rohan.mukka-1@ou.edu)**  
+- **Rohan Mukka(rohan.mukka-1@ou.edu)**
+
+---
+
+## License
+
+Licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
 
 ---
