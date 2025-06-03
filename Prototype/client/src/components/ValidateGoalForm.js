@@ -3,10 +3,9 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import BenefitABI from "../abi/BenefitLockAndReleaseNoDeadline.json";
 
-const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 const REDIRECT_URI = "http://localhost:5050/oauth-callback";
-require("dotenv").config();
 
 export default function ValidateGoalForm() {
   // State variables for managing user data and UI state
