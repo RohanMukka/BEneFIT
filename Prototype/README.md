@@ -18,6 +18,15 @@ You should also have:
 ---
 ## 📚 How to Run
 
+### 0. Install Dependencies
+Run `npm install` once in the root `Prototype/` directory:
+```bash
+npm install
+```
+This installs all packages shared by the frontend and the backend. The `server/`
+folder does not contain its own `package.json`; it relies on these root
+dependencies.
+
 ### 1. Start the Frontend
 Go to the `client/` folder and run:
 ```bash
