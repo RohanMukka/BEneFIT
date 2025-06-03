@@ -135,6 +135,9 @@ BEneFIT/
 
 Note: This prototype is optional and may contain simplified implementations for ETH staking and goal verification logic.
 
+Environment variables for both the backend and React client can be configured
+using the example file at `Prototype/.env.example`.
+
 ---
 
 ## 📊 Evaluation Summary
